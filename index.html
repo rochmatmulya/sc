@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Samsung Care+ · MX Affordability & Device Lifecycle</title>
+<style>
+  :root{
+    --navy:#0B1F3A; --cobalt:#1428A0; --electric:#1F5BFF; --ice:#A7D8FF; --ice-soft:#E8F4FF;
+    --bg:#F3F5F9; --line:rgba(11,31,58,.08); --muted:#5B6B82; --text:#0B1F3A;
+    --grad:linear-gradient(135deg,#0B1F3A 0%,#1428A0 45%,#1F5BFF 80%,#A7D8FF 100%);
+    --grad2:linear-gradient(90deg,#1428A0,#1F5BFF);
+    --shadow:0 10px 30px -12px rgba(11,31,58,.18); --radius:18px;
+    --good:#1B9E6B; --warn:#E08A00;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(900px 500px at 90% -10%,rgba(167,216,255,.55),transparent 60%),
+    radial-gradient(700px 500px at -10% 110%,rgba(31,91,255,.12),transparent 60%),var(--bg);
+    color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+
+  /* SIDEBAR */
+  .side{position:sticky;top:0;height:100vh;padding:24px 14px;background:rgba(255,255,255,.6);
+    backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
+    border-right:1px solid rgba(255,255,255,.9);display:flex;flex-direction:column;gap:18px}
+  .brand{display:flex;align-items:center;gap:12px;padding:6px 8px}
+  .logo{width:38px;height:38px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;box-shadow:0 8px 20px -6px rgba(31,91,255,.6)}
+  .brand h1{font-size:15px;font-weight:700}
+  .brand small{display:block;color:var(--muted);font-size:12px}
+  .nav{display:flex;flex-direction:column;gap:4px}
+  .nav button{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font-size:14px;color:var(--muted);font-weight:500;transition:all .25s}
+  .nav button .n{font-size:11px;font-weight:700;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:rgba(11,31,58,.06);color:var(--navy);transition:all .25s}
+  .nav button:hover{background:#fff;color:var(--text);transform:translateX(3px)}
+  .nav button.active{background:#fff;color:var(--text);font-weight:700;box-shadow:0 6px 18px -8px rgba(20,40,160,.35),inset 0 0 0 1px var(--line)}
+  .nav button.active .n{background:var(--grad);color:#fff}
+  .side-foot{margin-top:auto;font-size:11px;color:var(--muted);padding:12px;border-top:1px solid var(--line)}
+
+  /* MAIN */
+  main{padding:28px 36px 60px;min-width:0}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--electric);font-weight:700}
+  .topbar h2{font-size:30px;font-weight:700;letter-spacing:-.02em;margin-top:4px}
+  .topbar p{color:var(--muted);font-size:14px;margin-top:4px;max-width:640px}
+  .pill{font-size:12px;font-weight:600;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--navy);box-shadow:var(--shadow)}
+  .page{display:none;animation:fade .45s ease both}
+  .page.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* GRID / CARD */
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+  .c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}
+  .c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+  .card{background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+    border:1px solid rgba(255,255,255,.9);border-radius:var(--radius);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.9);
+    padding:20px 22px;min-width:0;transition:transform .3s,box-shadow .3s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 16px 36px -14px rgba(11,31,58,.25)}
+  .card h3{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .card h3::before{content:"";width:6px;height:16px;border-radius:3px;background:var(--grad);flex:none}
+  .label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .small{font-size:12px;color:var(--muted)}
+  .body{font-size:14px;color:#24344D}
+  .quote{font-size:13.5px;font-style:italic;color:#24344D;border-left:3px solid var(--ice);padding:4px 0 4px 12px;margin:8px 0}
+  .hero{background:var(--grad);color:#fff;border:none;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(167,216,255,.5),transparent 65%)}
+  .hero h3,.hero .body,.hero .small{color:#fff}
+  .hero h3::before{background:#fff}
+  .hero .label{color:rgba(255,255,255,.8)}
+  .chip{display:inline-block;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--ice-soft);color:var(--cobalt);margin:3px 4px 3px 0}
+  .chip.dark{background:var(--navy);color:#fff}
+  .chip.warn{background:#FFF4E0;color:#8A5A00}
+  .chip.good{background:#E4F7EF;color:#117A52}
+  .warnbox{font-size:12.5px;background:#FFF8EC;border:1px solid #F5DDB0;color:#7A5200;border-radius:12px;padding:10px 12px;margin-top:12px}
+  .note{font-size:12px;color:var(--muted);margin-top:10px;font-style:italic}
+  .hr{height:1px;background:var(--line);margin:14px 0}
+
+  /* KPI TILE */
+  .tile{padding:18px 20px}
+  .tile .val{font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--navy);margin-top:4px;font-variant-numeric:tabular-nums}
+  .tile .val small{font-size:13px;color:var(--muted);font-weight:500;margin-left:4px}
+  .tile .meta{font-size:12px;color:var(--muted);margin-top:4px}
+  .tile .meta b{color:var(--navy);font-weight:600}
+
+  /* RING */
+  .ring-wrap{display:flex;align-items:center;gap:16px}
+  .ring{position:relative;width:96px;height:96px;flex:none}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .track{fill:none;stroke:rgba(11,31,58,.08);stroke-width:10}
+  .ring .prog{fill:none;stroke:url(#gradStroke);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1)}
+  .ring .txt{position:absolute;inset:0;display:grid;place-items:center;font-size:15px;font-weight:700;color:var(--navy)}
+
+  /* BAR CHART */
+  .bars{display:flex;flex-direction:column;gap:11px}
+  .brow{display:grid;grid-template-columns:120px 1fr 70px;align-items:center;gap:10px;font-size:13px}
+  .brow .nm{color:var(--navy);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .track2{height:12px;border-radius:999px;background:rgba(11,31,58,.06);overflow:hidden}
+  .fill{height:100%;width:0;border-radius:999px;background:var(--grad2);transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+  .brow .v{text-align:right;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+  .stack{display:flex;height:16px;border-radius:999px;overflow:hidden;background:rgba(11,31,58,.06)}
+  .stack span{height:100%;width:0;transition:width 1.1s cubic-bezier(.2,.7,.2,1);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden}
+  .legend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+  /* COLUMN CHART */
+  .cols{display:flex;align-items:flex-end;gap:14px;height:200px;padding:10px 4px 0;border-bottom:1px solid var(--line)}
+  .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+  .col .bar{width:100%;max-width:60px;border-radius:10px 10px 4px 4px;background:var(--grad2);height:0;transition:height 1s cubic-bezier(.2,.7,.2,1);position:relative}
+  .col .bar.alt{background:linear-gradient(180deg,#FFB547,#E08A00)}
+  .col .bar span{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap}
+  .col .lb{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}
+  .col-legend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:12px}
+
+  /* DONUT */
+  .donut-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .donut{width:160px;height:160px;position:relative;flex:none}
+  .donut svg{transform:rotate(-90deg)}
+  .donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;color:var(--muted)}
+  .donut .center b{font-size:20px;color:var(--navy)}
+  .dleg{display:flex;flex-direction:column;gap:9px;font-size:13px;flex:1;min-width:150px}
+  .dleg div{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+
+  /* FLOW / STEPS / CHEVRON */
+  .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;position:relative}
+  .flow .node{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;position:relative;margin:4px;transition:transform .25s,box-shadow .25s}
+  .flow .node:hover{transform:translateY(-3px);box-shadow:0 12px 24px -12px rgba(20,40,160,.3)}
+  .flow .node .no{width:30px;height:30px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;margin-bottom:8px}
+  .flow .node h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+  .flow .node p{font-size:12px;color:var(--muted)}
+  .chev{display:flex;gap:0;overflow:hidden;border-radius:14px}
+  .chev>div{flex:1;padding:14px 18px 14px 26px;color:#fff;position:relative;min-width:0}
+  .chev>div::after{content:"";position:absolute;right:-14px;top:0;bottom:0;width:28px;background:inherit;transform:skewX(-20deg);border-radius:0 6px 6px 0}
+  .chev>div:last-child::after{display:none}
+  .chev h4{font-size:13px;font-weight:700;margin-bottom:4px}
+  .chev p{font-size:12px;opacity:.9}
+
+  /* PRICE CARDS */
+  .band-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .band{border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 8px 20px -14px rgba(11,31,58,.3);transition:transform .25s}
+  .band:hover{transform:translateY(-4px)}
+  .band .hd{padding:12px 16px;font-weight:700;color:#fff;font-size:14px;letter-spacing:.04em;display:flex;justify-content:space-between;align-items:center}
+  .band .hd small{font-weight:500;opacity:.85;font-size:11px}
+  .band .bd{padding:14px 16px}
+  .band .price{font-size:22px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+  .band .price small{font-size:12px;color:var(--muted);font-weight:500}
+  .band .sub{font-size:11.5px;color:var(--muted);margin-top:4px;min-height:32px}
+  .band .split{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+  .band .split div{background:var(--ice-soft);border-radius:10px;padding:8px}
+  .band .split span{font-size:10.5px;color:var(--muted);display:block;font-weight:700;letter-spacing:.04em}
+  .band .split b{font-size:14px;color:var(--navy);font-variant-numeric:tabular-nums}
+  .band .fee{margin-top:10px;font-size:12px;color:var(--muted)}
+  .band .fee b{color:var(--navy)}
+  .strike{text-decoration:line-through;color:#98A3B5;font-size:12px;font-weight:500;margin-right:6px}
+  .drop{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:6px;background:#E4F7EF;color:#117A52;margin-left:4px;vertical-align:middle}
+  .tier-silver{background:linear-gradient(90deg,#8A94A6,#C9D0DB)}
+  .tier-gold{background:linear-gradient(90deg,#B8860B,#E7C873)}
+  .tier-plat{background:linear-gradient(90deg,#5E6B7D,#A7B1BF)}
+  .tier-dia{background:linear-gradient(90deg,#1F5BFF,#A7D8FF)}
+  .tier-flip{background:linear-gradient(90deg,#000,#5B6B82)}
+  .tier-fold{background:linear-gradient(90deg,#0B1F3A,#3A4B66)}
+
+  /* GANTT */
+  .gantt{display:grid;gap:6px;font-size:12px;min-width:820px}
+  .gantt .wk{display:grid;grid-template-columns:200px repeat(9,1fr);gap:4px;align-items:center}
+  .gantt .wk .h{font-size:10.5px;font-weight:700;color:var(--muted);text-align:center}
+  .gantt .row{display:grid;grid-template-columns:200px repeat(9,1fr);gap:4px;align-items:center;padding:4px 0;border-top:1px dashed var(--line)}
+  .gantt .row .lbl2{font-weight:600;color:var(--navy);font-size:12px;padding-right:8px}
+  .gantt .bar{height:34px;border-radius:9px;color:#fff;font-weight:600;font-size:11.5px;display:flex;align-items:center;padding:0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 6px 14px -10px rgba(11,31,58,.5);transition:transform .2s}
+  .gantt .bar:hover{transform:scale(1.015)}
+  .gantt .bar.lite{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1px var(--line)}
+
+  /* TIMELINE */
+  .tl{position:relative;padding-left:22px}
+  .tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--electric),var(--ice))}
+  .tl .it{position:relative;margin-bottom:14px}
+  .tl .it::before{content:"";position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--grad2);box-shadow:0 0 0 4px rgba(31,91,255,.15)}
+  .tl .it .d{font-size:11px;font-weight:700;color:var(--electric);letter-spacing:.06em}
+  .tl .it p{font-size:13px;color:#24344D}
+
+  /* KOL */
+  .kol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .kol{background:#fff;border-radius:16px;padding:14px;border:1px solid var(--line);transition:transform .25s,box-shadow .25s;text-align:center}
+  .kol:hover{transform:translateY(-4px);box-shadow:0 16px 28px -16px rgba(20,40,160,.4)}
+  .avatar{width:58px;height:58px;border-radius:50%;margin:0 auto 8px;background:var(--grad);color:#fff;display:grid;place-items:center;font-weight:700;font-size:16px;box-shadow:0 8px 16px -8px rgba(31,91,255,.6)}
+  .kol b{display:block;font-size:13px;color:var(--navy)}
+  .kol .m{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .kol .bar{height:6px;border-radius:99px;background:rgba(11,31,58,.06);margin:8px 0 4px;overflow:hidden}
+  .kol .bar i{display:block;height:100%;width:0;background:var(--grad2);border-radius:99px;transition:width 1s}
+  .kol .er{font-size:12px;color:var(--cobalt);font-weight:700}
+
+  /* PERSONA */
+  .persona{border-radius:18px;padding:18px;background:#fff;border:1px solid var(--line);height:100%;position:relative;overflow:hidden}
+  .persona::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:var(--grad)}
+  .persona .ico{width:44px;height:44px;border-radius:14px;background:var(--ice-soft);display:grid;place-items:center;font-size:20px;margin-bottom:10px}
+  .persona h4{font-size:15px;color:var(--navy);margin-bottom:8px}
+  .persona .q{font-size:13px;font-style:italic;color:#24344D;background:var(--ice-soft);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+  .usp{display:flex;flex-direction:column;gap:8px}
+  .usp div{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#24344D}
+  .usp span.dot2{flex:none;width:22px;height:22px;border-radius:7px;background:var(--grad);color:#fff;font-size:11px;display:grid;place-items:center;font-weight:700}
+
+  /* MATRIX */
+  .matrix{display:grid;grid-template-columns:110px repeat(17,1fr);gap:4px;font-size:11px;min-width:960px}
+  .matrix .h{font-weight:700;color:var(--muted);text-align:center;padding:6px 0;font-size:10.5px}
+  .matrix .m{text-align:center;font-weight:700;color:var(--navy);padding:6px 0;border-bottom:2px solid var(--ice);font-size:12px}
+  .matrix .lbl2{font-weight:700;color:var(--navy);font-size:11.5px;align-self:center}
+  .matrix .cell{min-height:44px;border-radius:10px;padding:6px 8px;color:#fff;font-weight:600;font-size:11.5px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3}
+  .scroll{overflow:auto;padding-bottom:6px}
+
+  /* TABLE */
+  .tbl-wrap{overflow:auto;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.7)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:rgba(11,31,58,.04);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  tr:last-child td{border-bottom:none}
+  td.num{font-variant-numeric:tabular-nums;font-weight:600;color:var(--navy);white-space:nowrap}
+
+  /* MISC */
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:7px;background:rgba(255,255,255,.2);margin-right:6px}
+  .icon-row{display:flex;gap:12px;flex-wrap:wrap}
+  .icon-card{flex:1;min-width:140px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+  .icon-card .ic{font-size:22px;margin-bottom:6px}
+  .icon-card b{display:block;font-size:13px;color:var(--navy)}
+  .icon-card span{font-size:11.5px;color:var(--muted)}
+
+  .tile .label{white-space:nowrap}
+  #reviewerGrid .small{white-space:nowrap;font-size:11px}
+  #reviewerGrid div[style*="ice-soft"]{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;min-height:62px}
+  #matrixComm img{height:200px;width:100%;object-fit:contain;background:#fff;border-radius:10px}
+  @media (max-width:1100px){.c3{grid-column:span 6}.c4{grid-column:span 6}.c5,.c6,.c7,.c8{grid-column:span 12}}
+  @media (max-width:820px){
+    .app{grid-template-columns:1fr}
+    .side{position:relative;height:auto;flex-direction:column;padding:14px}
+    .nav{flex-direction:row;overflow-x:auto}
+    .nav button{white-space:nowrap}
+    .side-foot{display:none}
+    main{padding:20px 16px 40px}
+    .grid>*{grid-column:span 12 !important}
+    .topbar h2{font-size:24px}
+    .brow{grid-template-columns:90px 1fr 56px}
+    .chev{flex-direction:column}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- gradient untuk ring SVG -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="gradStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1428A0"/><stop offset="60%" stop-color="#1F5BFF"/><stop offset="100%" stop-color="#A7D8FF"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">S+</div><div><h1>Samsung Care+</h1><small>MX Affordability &amp; Device Lifecycle</small></div></div>
+  <nav class="nav" id="nav">
+    <button class="active" data-page="background"><span class="n">01</span>Background</button>
+    <button data-page="product"><span class="n">02</span>Product Benefit</button>
+    <button data-page="comm"><span class="n">03</span>Communication &amp; Creative</button>
+    <button data-page="mktplan"><span class="n">04</span>Marketing Plan</button>
+    <button data-page="digital"><span class="n">05</span>Digital</button>
+    <button data-page="influencers"><span class="n">06</span>Influencers</button>
+    <button data-page="pr"><span class="n">07</span>PR</button>
+    <button data-page="retail"><span class="n">08</span>Retail</button>
+    <button data-page="rollout"><span class="n">09</span>Roll Out</button>
+    <button data-page="kpi"><span class="n">10</span>KPI</button>
+  </nav>
+  <div class="side-foot">SEIN © 2026 · Private &amp; Confidential</div>
+</aside>
+
+<main>
+
+<!-- ============ 01 BACKGROUND ============ -->
+<section class="page show" id="background">
+  <div class="topbar"><div><div class="kicker">01 · Background</div><h2>1H’26 Achievement &amp; 2H’26 Target</h2><p>1H’26 performance, 2H’26 target, challenges, and Campaign Objective.</p></div><span class="pill">Samsung Care+ · MX Affordability</span></div>
+  <div class="grid">
+    <div class="card hero c6">
+      <div class="label">1H’26 Achievement</div>
+      <div class="ring-wrap" style="margin-top:8px">
+        <div class="ring"><svg width="96" height="96"><circle class="track" cx="48" cy="48" r="40" style="stroke:rgba(255,255,255,.2)"/><circle class="prog" data-ring="42" cx="48" cy="48" r="40" stroke-dasharray="251.3" stroke-dashoffset="251.3" style="stroke:#fff"/></svg><div class="txt" style="color:#fff">42%</div></div>
+        <div><div class="stat" style="font-size:30px;font-weight:700">64.4K <span style="font-size:13px;opacity:.8">Ach</span></div><div class="small">of Target 154.6K · %AR 2.8%</div></div>
+      </div>
+    </div>
+    <div class="card hero c6">
+      <div class="label">2H’26 Target</div>
+      <div class="ring-wrap" style="margin-top:8px">
+        <div class="ring"><svg width="96" height="96"><circle class="track" cx="48" cy="48" r="40" style="stroke:rgba(255,255,255,.2)"/><circle class="prog" data-ring="5" cx="48" cy="48" r="40" stroke-dasharray="251.3" stroke-dashoffset="251.3" style="stroke:#fff"/></svg><div class="txt" style="color:#fff">5%</div></div>
+        <div><div class="stat" style="font-size:30px;font-weight:700">16K <span style="font-size:13px;opacity:.8">Ach</span></div><div class="small">of Target 310K · %AR 3.9%</div><div class="chip" style="background:rgba(255,255,255,.2);color:#fff;margin-top:8px">+127Kp to Ach 2H target</div></div>
+      </div>
+    </div>
+
+    <div class="card tile c3"><div class="label">Coverage</div><div class="val">4.9k<small>EBS 100%</small></div><div class="meta">~Aug’26 <b>4,5k, EBS 96%</b></div></div>
+    <div class="card tile c3"><div class="label">AR</div><div class="val">$ 3.9M</div><div class="meta">Total <b>3.9%</b> · SES <b>20%</b> · eStore <b>8.2%</b></div><div class="meta">~Aug’26 <b>-1.1%p</b> · <b>-10.6%p</b> · <b>-2.7%p</b></div></div>
+    <div class="card tile c6"><div class="label">Weekly Active Stores</div><div class="val">SES 70%<small>non SES 15%</small></div><div class="meta">~W34 <b>SES 57%</b>, non SES <b>16%</b></div>
+      <div class="bars" style="margin-top:10px">
+        <div class="brow"><span class="nm">SES</span><div class="track2"><div class="fill" data-w="70"></div></div><span class="v">70%</span></div>
+        <div class="brow"><span class="nm">Non SES</span><div class="track2"><div class="fill" data-w="15"></div></div><span class="v">15%</span></div>
+      </div></div>
+
+    <div class="card c4"><h3>1H’26 By Channel</h3><div id="donutChannel"></div></div>
+    <div class="card c4"><h3>1H’26 Seg. Device</h3><div id="barDevice"></div></div>
+    <div class="card c4"><h3>1H’26 Duration of Use</h3><div id="stackDuration"></div></div>
+
+    <div class="card c6"><h3>Challenges</h3>
+      <div class="icon-row">
+        <div class="icon-card"><div class="ic">📈</div><b>RRP Smartphone increased</b><span>Phone prices going up</span></div>
+        <div class="icon-card"><div class="ic">🔁</div><b>Customer Device Lifecycle (&lt;2Y): Trade In</b><span>Phone replacement cycle</span></div>
+      </div>
+      <div class="icon-row" style="margin-top:12px">
+        <div class="icon-card"><div class="ic">🛡️</div><b>Why does the customer need this protection immediately?</b><span>Why protection is needed</span></div>
+        <div class="icon-card"><div class="ic">🏬</div><b>Where to buy Samsung Care+?</b><span>Where to buy</span></div>
+      </div>
+    </div>
+
+    <div class="card c6"><h3>Sales Talk · 5 Damage Type</h3><div id="damageChart"></div>
+      <div class="small" style="margin-top:10px">Covered by Samsung Care+: Crack Screen · Covered by Ext Warr.: Line on Display, Mic Damage, Port Charger, Power Off</div></div>
+
+    <div class="card c12"><h3>2 Simulation · Galaxy A56 5G</h3>
+      <div class="flow" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <div class="node"><div class="no">1</div><h4>Screen Replacement</h4><p>Galaxy A56 5G</p></div>
+        <div class="node"><div class="no">2</div><h4>Screen Rp 700,000</h4><p>+ Service Fee Rp 160,000</p></div>
+        <div class="node" style="background:var(--grad);color:#fff"><div class="no" style="background:#fff;color:var(--navy)">=</div><h4 style="color:#fff">Rp 860,000</h4><p style="color:rgba(255,255,255,.85)">Total simulation</p></div>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <div class="c6" style="background:#E4F7EF;border-radius:14px;padding:14px"><div class="label" style="color:#117A52">IF Repair</div><p class="body">Screen Replacement · Covered by Samsung Care+ · Service Fee Rp 160,000</p></div>
+        <div class="c6" style="background:#FFF4E0;border-radius:14px;padding:14px"><div class="label" style="color:#8A5A00">IF Not Repair</div><p class="body">RV (Return Value) · Exchange / no-repair path available</p></div>
+      </div>
+    </div>
+
+    <div class="card c12"><h3>Campaign Objective · Attachment Rate</h3>
+      <div class="grid">
+        <div class="c4" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+          <div class="ring" style="width:150px;height:150px"><svg width="150" height="150"><circle class="track" cx="75" cy="75" r="62"/><circle class="prog" data-ring="2.4" cx="75" cy="75" r="62" stroke-dasharray="389.6" stroke-dashoffset="389.6"/></svg><div class="txt" style="font-size:26px">2.4%</div></div>
+          <div class="small" style="margin-top:10px">700 Samsung Care+ dari 29,761 sell out</div>
+        </div>
+        <div class="c8">
+          <div class="label" style="margin-bottom:8px">Yes / No per week (share of No)</div>
+          <div class="bars" id="weeklyYesNo"></div>
+          <div class="small" style="margin-top:8px">Bar size and labels use the selected total per week.</div>
+        </div>
+        <div class="c6" style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px"><div class="label" style="margin-bottom:8px">Type Yes-only per minggu</div><div id="weeklyType"></div><div class="legend"><span><i style="background:#1F5BFF"></i>ADLD</span><span><i style="background:#E08A00"></i>SCR</span></div></div>
+        <div class="c6" style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px"><div class="label" style="margin-bottom:8px">Total Selected Samsung Care+ Type</div>
+          <div class="donut-row"><div class="donut" id="donutType"></div>
+            <div class="dleg"><div><span><i class="dot" style="background:#1F5BFF"></i>ADLD</span><b>577 · 82.4%</b></div><div><span><i class="dot" style="background:#E08A00"></i>SCR</span><b>123 · 17.6%</b></div><div><span>Total selected</span><b>700 · 100%</b></div></div></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 PRODUCT BENEFIT ============ -->
+<section class="page" id="product">
+  <div class="topbar"><div><div class="kicker">02 · Product Benefit</div><h2>What’s New, USP &amp; New Price</h2><p>What changes, competitive position, and price per band.</p></div><span class="pill">Emphasizes USP &amp; New Product</span></div>
+  <div class="grid">
+    <div class="card c12"><h3>What’s New? · Product AS IS → New Product</h3>
+      <div class="grid" id="whatsNew"></div>
+    </div>
+
+    <div class="card c12"><h3>USP vs Competitor</h3><div id="uspGrid"></div></div>
+
+    <div class="card c12"><h3>What’s New? · Improving “second-chance” purchase for Customer</h3>
+      <div class="grid">
+        <div class="c6"><div class="label" style="margin-bottom:8px">1 · Warranty &amp; Care</div>
+          <div class="chev"><div style="background:#1428A0"><h4>Warranty and care</h4><p>Buka menu di Settings</p></div><div style="background:#1F5BFF"><h4>Get protection</h4><p>Tombol muncul bila eligible</p></div><div style="background:#4C84FF"><h4>Periksa kelayakan</h4><p>Input IMEI / Nomor Seri</p></div></div>
+        </div>
+        <div class="c6"><div class="label" style="margin-bottom:8px">2 · Promotor Code in Samsung Gift Indonesia</div>
+          <div class="chev"><div style="background:#1428A0"><h4>Verify data</h4><p>Cek data akun SGI</p></div><div style="background:#1F5BFF"><h4>Referral code</h4><p>4–10 digit dari promotor</p></div><div style="background:#4C84FF"><h4>Checkbox &amp; bayar</h4><p>Lanjutkan pembayaran</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c12"><h3>New Price · Easy Protection – Monthly Subscription exclusive in eStore</h3><div class="band-grid" id="bandsEasy"></div>
+      </div>
+
+    <div class="card c12"><h3>New Price · Affordable Product – Crack Screen</h3><div class="band-grid" id="bandsCrack"></div></div>
+
+    <div class="card c12"><h3>New Price · Price Drop – Full Protection / ADLD</h3><div class="sub">Additional 3 Months exclusive for SES</div><div class="band-grid" id="bandsFull"></div></div>
+  </div>
+</section>
+
+<!-- ============ 03 COMMUNICATION ============ -->
+<section class="page" id="comm">
+  <div class="topbar"><div><div class="kicker">03 · Communication &amp; Creative</div><h2>Upgrade with Care</h2><p>Under the umbrella campaign Galaxy Upgrade Festival, Samsung Care+ continues with using Galaxy with Care to synchronized.</p></div><span class="pill">#UpgradewithCare · #UpgradeYangSmart</span></div>
+  <div class="grid">
+    <div class="card c12" style="background:#fff"><h3>Background Communication Strategy</h3><div class="grid" style="gap:14px"><div class="card c12"><h3>Storyline</h3>
+      <div class="flow" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
+        <div class="node"><div class="no">1</div><h4>The world keeps upgrading</h4><p>and it expects us to do the same.</p></div>
+        <div class="node"><div class="no">2</div><h4>So we reach for what’s new</h4><p>hoping every choice is a smart step forward.</p></div>
+        <div class="node"><div class="no">3</div><h4>But with every choice, comes worries</h4><p>Is ‘new’ enough to call it an upgrade? Will it bring more value?</p></div>
+        <div class="node" style="background:var(--grad);color:#fff"><div class="no" style="background:#fff;color:var(--navy)">4</div><h4 style="color:#fff">We make every upgrade a smarter step forward!</h4><p style="color:rgba(255,255,255,.85)">GUF knows how to mend those worries</p></div>
+      </div>
+    </div>
+
+    <div class="card c12"><h3>Those worries get even louder when it’s time to upgrade our smartphones</h3>
+      <div class="icon-row">
+        <div class="icon-card"><div class="ic">🛡️</div><b>“Protection when unexpected moments happen”</b></div>
+        <div class="icon-card"><div class="ic">🛠️</div><b>“Convenience when support is needed”</b></div>
+        <div class="icon-card"><div class="ic">📱</div><b>“Flexibility when they are ready for their next Galaxy”</b></div>
+      </div>
+      <p class="body" style="margin-top:12px">Today’s consumers look beyond the purchase and expect more value from every choice. It’s no longer just about owning the latest device, but having the reassurance that what they choose is truly an upgrade.</p>
+    </div>
+
+    </div></div>
+    <div class="card c12 hero"><div class="label">Galaxy Upgrade Festival (GUF)</div>
+      <div class="stat" style="font-size:28px">Beyond new devices, we support your effort to upgrade and ready to protect with utmost care.</div>
+      <div class="icon-row" style="margin-top:14px">
+        <div class="icon-card" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3)"><div class="ic">🔄</div><b style="color:#fff">Trade-In Offers</b><span style="color:rgba(255,255,255,.85)">support your effort to upgrade</span></div>
+        <div class="icon-card" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3)"><div class="ic">🛡️</div><b style="color:#fff">Samsung Care+</b><span style="color:rgba(255,255,255,.85)">ready to protect with utmost care</span></div>
+        <div class="icon-card" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3)"><div class="ic">🎁</div><b style="color:#fff">Everyone gets more</b><span style="color:rgba(255,255,255,.85)">from one decision</span></div>
+      </div>
+      <p class="body" style="margin-top:12px;color:#fff">Because moving forward should mean leaving worries behind, not creating new ones.</p>
+    </div>
+
+    <div class="card c12"><h3>Communication Strategy</h3>
+      <p class="body" style="font-size:16px;display:none">An invitation to upgrade your life with a new Galaxy through Trade-In Offers and Samsung Care+, giving you more value, more benefits, and more reassurance throughout your upgrade journey, without bringing unnecessary worries along with it.</p>
+      <img src="https://res.cloudinary.com/rolpld3f/image/upload/v1793775008/Screenshot_2026-11-04_134935.png" alt="Communication Strategy" loading="lazy" style="width:100%;border-radius:14px;margin-top:14px;border:1px solid var(--line)">
+      <img src="https://res.cloudinary.com/rolpld3f/image/upload/v1794371773/Screenshot_2026-11-11_092650.png" alt="We present you… Upgrade with Care" loading="lazy" style="width:100%;border-radius:14px;margin-top:14px;border:1px solid var(--line)">
+    </div>
+
+    <div class="card c6" style="background:#fff;display:none"><h3>Reply-and-win · #UpgradeYangSmart</h3>
+      <div class="flow" style="grid-template-columns:repeat(3,1fr)">
+        <div class="node"><div class="no">1</div><h4>Screenshot</h4><p>Device impian dari GIF</p></div>
+        <div class="node"><div class="no">2</div><h4>Share why</h4><p>Kenapa ada di wishlist tahun ini</p></div>
+        <div class="node"><div class="no">3</div><h4>Win</h4><p><b>[PRIZE]</b> / <b>[HADIAH]</b></p></div>
+      </div>
+      <p class="body" style="margin-top:12px">To get more people familiar with the benefits of #UpgradewithCare, we’ll release a GIF featuring different Galaxy devices, each paired with its Trade-In value and Samsung Care+ transfer benefit.</p>
+      <p class="quote">Siapa yang mau upgrade device tahun ini? 🙋‍♂️🙋‍♀️ Coba screenshot smartphone yang kamu idamkan dari GIF ini, lalu kasih tahu gimana kamu bisa ngelakuin #UpgradeYangSmart karena #SamsungCarePlus!</p>
+      
+    </div>
+
+    <div class="card c6" style="display:none"><h3>Contoh UGC</h3>
+      <div class="chat-bubble" style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px"><div class="label">Kreator</div><p class="body" style="margin-top:4px">“Dari awal keluar emang udah ngidam banget sama #GalaxyZFold8 😳😳”</p></div>
+      <div class="chat-bubble" style="background:var(--ice-soft);border-radius:16px;padding:14px"><p class="body">Untung ada #SamsungCarePlus yang bikin mudah proses Trade In dan dapet harga SPESIAL. Plus, aku yang udah langganan Galaxy Care+ di hape lama bisa ditransfer ke hape baru.</p></div>
+      <div style="margin-top:10px"><span class="chip">#UpgradeYangSmart</span><span class="chip">#UpgradewithCare</span></div>
+    </div>
+
+    <div class="card c6" style="background:#fff;display:none"><h3>Trade-In | Transfer Policy</h3>
+      <div class="sub">For MZ, wanting the latest device is easy. Convincing themselves to upgrade is the hard part.</div>
+      <div class="chev">
+        <div style="background:#5B6B82"><h4>Sunk costs</h4><p>Leaving paid insurance behind, spending again after recent big purchase, selling the old phone.</p></div>
+        <div style="background:#8A5CF6"><h4>Too much drama</h4><p>Together, these sunk costs can create too much drama.</p></div>
+        <div style="background:#1F5BFF"><h4>Smarter way</h4><p>Samsung Care+ transfers to the new phone; Trade-In makes the old device easier to turn into value.</p></div>
+      </div>
+    </div>
+
+    <div class="card c12" style="order:2"><h3>Creative Matrix Plan</h3><div class="sub">W37–W53 · Past · Ongoing · Upcoming</div>
+      <div class="scroll"><div class="matrix" id="matrixComm"></div></div>
+      <div class="matrix-status small" style="margin-top:8px">Visual per bulan tersedia di slide sumber (poster Sep, GUF Okt, aset Nov &amp; Des masih WIP).</div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>Creative Assets Concept <span class="chip warn">WIP</span></h3>
+      <div class="band-grid" id="altGrid"></div>
+      
+    </div>
+
+    <div class="card c12" style="order:1"><h3>Communication Framework · UPGRADE WITH CARE</h3>
+      <div class="hero" style="border-radius:16px;padding:16px 18px;margin-bottom:14px"><div class="label">Key Message</div><p class="body" style="color:#fff;font-size:15px;margin-top:4px">Upgrade your life with a new Galaxy through Samsung Care+ and attractive Trade-In Offers, giving you more value, more benefits, and greater peace of mind throughout your upgrade journey.</p></div>
+      <div class="grid">
+        <div class="c6"><div class="persona" style="height:auto"><div class="ico">🛡️</div><h4>Enjoy greater peace of mind with Samsung Care+</h4><div class="usp" id="pillarA"></div></div></div>
+        <div class="c6"><div class="persona" style="height:auto"><div class="ico">🔄</div><h4>Make your Galaxy upgrade more rewarding</h4><div class="usp" id="pillarB"></div></div></div>
+        <div class="c12"><div class="label" style="margin-bottom:8px">Marketing Task</div><div class="grid" id="mktTask"></div></div>
+        <div class="c12" style="display:none"><div class="label" style="margin-bottom:8px">KPI</div><div class="icon-row" id="kpiComm"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 MARKETING PLAN ============ -->
+<section class="page" id="mktplan">
+  <div class="topbar"><div><div class="kicker">04 · Marketing Plan</div><h2>Marketing Framework</h2><p>Samsung Care+ Framework to establish on Product Engagement by 40% and Drive Traffic to Store by 60%</p></div><span class="pill">SC+ in Q4 · 2 Key Pillars</span></div>
+  <div class="grid">
+    <div class="card c6"><h3>Q4 Target · SC+ per bulan</h3><div id="q4Cols"></div><div class="note">21.830 + 19.085 + 26.952 = 67.867 (slide tertulis 67.868, selisih 1).</div></div>
+    <div class="card c6"><h3>Q4 Target · Revenue ($) per bulan</h3><div id="q4Rev"></div></div>
+    <div class="card c4"><h3>Product Mix Contribution</h3><div id="mixDonut"></div></div>
+    <div class="card c8"><h3>Attachment Rate per Segment · Aug ‘26</h3><div id="arSeg"></div></div>
+
+    <div class="card c12"><h3>Consumer Engagement Framework · 7 Pillars</h3>
+      <div class="wheel" id="pillars7"></div>
+    </div>
+
+    <div class="card c12"><h3>SC+ in Q4 · 2 Key Pillars</h3>
+      <div class="sub">TO ENGAGE: From opinionated content to store traffic generation</div>
+      <div class="split" style="display:flex;height:70px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)">
+        <div style="flex:40;background:linear-gradient(135deg,#1F5BFF,#1428A0);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px"><b style="font-size:16px">Product Engagement</b><span style="font-size:26px;font-weight:700">40%</span></div>
+        <div style="flex:60;background:linear-gradient(135deg,#7A2FA8,#4B1A7A);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px"><b style="font-size:16px">Store Traffic Generation</b><span style="font-size:26px;font-weight:700">60%</span></div>
+      </div>
+      <div class="grid" style="margin-top:16px" id="postsBars"></div>
+    </div>
+
+    <div class="card c12"><h3>Key Messaging · Upgrade with Care</h3>
+      <div class="grid">
+        <div class="c6" style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px"><div class="label" style="margin-bottom:6px">Product Engagement · 40% · Affordability vs CXP</div>
+          <div class="bars"><div class="brow"><span class="nm">Affordability</span><div class="track2"><div class="fill" data-w="30"></div></div><span class="v">30%</span></div><div class="brow"><span class="nm">CXP</span><div class="track2"><div class="fill" data-w="70"></div></div><span class="v">70%</span></div></div>
+          <div class="chip dark" style="margin-top:12px">NOV · ADLD / Full Protection</div>
+          <p class="quote" style="font-size:22px;font-style:normal;font-weight:800;color:var(--navy);line-height:1.3">“Perlindungan Total Galaxy <span style="font-size:14px;font-weight:600">mulai dari</span> Rp.200Ribuan”</p>
+          <p class="small">Make protection feel affordable and easy to add at upgrade.</p>
+          <p class="quote">“Upgrade tenang, perlindungan Galaxy bisa ditambah mulai Rp200 ribuan.”</p>
+        </div>
+        <div class="c6" style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px"><div class="label" style="margin-bottom:6px">Store Traffic Generation · 60% · Affordability vs CXP</div>
+          <div class="bars"><div class="brow"><span class="nm">Affordability</span><div class="track2"><div class="fill" data-w="70"></div></div><span class="v">70%</span></div><div class="brow"><span class="nm">CXP</span><div class="track2"><div class="fill" data-w="30"></div></div><span class="v">30%</span></div></div>
+          <div class="chip dark" style="margin-top:12px">DEC • Global Repair</div>
+          <p class="quote" style="font-size:22px;font-style:normal;font-weight:800;color:var(--navy);line-height:1.3">“Jaminan Perbaikan Global <span style="font-size:14px;font-weight:600">mulai dari</span> Rp.200Ribuan”</p>
+          <p class="small">Build confidence with trusted, global-standard repair support.</p>
+          <p class="quote">“Ke mana pun perjalananmu, dukungan perbaikan global tetap ada.”</p>
+        </div>
+        <div class="c12 hero" style="border-radius:16px;padding:18px"><div class="label">Call to Action</div><p class="body" style="color:#fff;font-size:18px;font-weight:700">“Upgrade perlindungan Galaxy di Toko Samsung terdekat!”</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 DIGITAL ============ -->
+<section class="page" id="digital">
+  <div class="topbar"><div><div class="kicker">05 · Digital</div><h2>Digital Strategic Framework &amp; OA Content</h2><p>Business objective, target audience, digital channel, OA content journey, short form clippers, dan content list.</p></div><span class="pill">Main Comms #CarePlusDramaMinus</span></div>
+  <div class="grid">
+    <div class="card tile" style="grid-column:span 2;display:none"><div class="label">Short Form</div><div class="val">200</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">Buzz</div><div class="val">11,906</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">Positive Sentiment</div><div class="val">38.08%</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">NPS</div><div class="val">37.75%</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">AEP</div><div class="val">1,548</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">NoP</div><div class="val">20</div></div>
+    <div class="card c12" style="background:#fff">
+      <h3>Digital Strategic Framework</h3>
+      <div style="background:linear-gradient(90deg,#0B0B0B,#3A3A3A 50%,#8A8A8A);color:#fff;border-radius:14px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px">
+        <span style="font-size:24px">🔑</span>
+        <div><div class="label" style="color:rgba(255,255,255,.8)">Key Comms</div><div style="font-size:20px;font-weight:800">Upgrade with Care</div></div>
+      </div>
+
+      <div class="label" style="margin-bottom:8px">🎯 Key Focus Approach</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+        <div style="border-radius:16px;overflow:hidden;border:1px solid #D0D0D0">
+          <div style="background:linear-gradient(90deg,#2B2B2B,#5A5A5A);color:#fff;padding:12px 16px">
+            <div style="font-size:11px;letter-spacing:.08em;opacity:.85">🆕 NEW USERS</div>
+            <div style="font-weight:800;font-size:14px;margin-top:2px">Turn protection into part of the Samsung purchase from Day 1</div>
+          </div>
+          <div style="padding:12px 16px;display:flex;flex-direction:column;gap:9px;font-size:13px;color:#24344D">
+            <div style="display:flex;gap:10px"><span>📌</span><span>Why protection matters from the start</span></div>
+            <div style="display:flex;gap:10px"><span>📦</span><span>What Samsung Care+ covers</span></div>
+            <div style="display:flex;gap:10px"><span>🧭</span><span>Which protection option fits their needs</span></div>
+            <div style="display:flex;gap:10px"><span>💭</span><span>Make the value feel worth considering before an incident happens</span></div>
+          </div>
+        </div>
+        <div style="border-radius:16px;overflow:hidden;border:1px solid #D0D0D0">
+          <div style="background:linear-gradient(90deg,#2B2B2B,#5A5A5A);color:#fff;padding:12px 16px">
+            <div style="font-size:11px;letter-spacing:.08em;opacity:.85">🔁 CURRENT USERS</div>
+            <div style="font-weight:800;font-size:14px;margin-top:2px">Remind them that protection is still a relevant part of owning their Samsung Galaxy</div>
+          </div>
+          <div style="padding:12px 16px;display:flex;flex-direction:column;gap:9px;font-size:13px;color:#24344D">
+            <div style="display:flex;gap:10px"><span>📊</span><span>Show the value of protection through real-life problems</span></div>
+            <div style="display:flex;gap:10px"><span>💰</span><span>Make repair cost and protection benefits more tangible</span></div>
+            <div style="display:flex;gap:10px"><span>⏰</span><span>Encourage them to consider Care+ before they actually need it</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="label" style="margin-bottom:8px">🛠️ Digital Strategy</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div style="background:#F7F7F7;border-radius:16px;padding:16px;border:1px solid #E0E0E0">
+          <div style="font-weight:800;color:var(--navy)">🏠 Digital Own Assets</div>
+          <div class="small" style="margin:4px 0 12px">Use Samsung-owned channels to build awareness, educate, and drive consideration to conversion</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:10px 12px;border:1px solid var(--line)"><span style="font-size:20px">📢</span><div><div style="font-weight:800;color:var(--navy);font-size:13px">AWARENESS <span style="font-weight:500;color:#5B6B82">· Create the reason to care</span></div><span class="chip" style="margin:4px 0 0">IG Reels + TikTok</span></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:10px 12px;border:1px solid var(--line)"><span style="font-size:20px">🎓</span><div><div style="font-weight:800;color:var(--navy);font-size:13px">EDUCATION <span style="font-weight:500;color:#5B6B82">· Show why Care+ is worth having</span></div><span class="chip" style="margin:4px 0 0">IG Carousel</span></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:10px 12px;border:1px solid var(--line)"><span style="font-size:20px">🔍</span><div><div style="font-weight:800;color:var(--navy);font-size:13px">CONSIDERATION <span style="font-weight:500;color:#5B6B82">· Make the value tangible</span></div><span class="chip" style="margin:4px 0 0">IG Reels</span></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:10px 12px;border:1px solid var(--line)"><span style="font-size:20px">🛒</span><div><div style="font-weight:800;color:var(--navy);font-size:13px">CONVERSION <span style="font-weight:500;color:#5B6B82">· Make the decision easier</span></div><span class="chip" style="margin:4px 0 0">IG Story + Reels + TikTok</span></div></div>
+          </div>
+        </div>
+        <div style="background:#F7F7F7;border-radius:16px;padding:16px;border:1px solid #E0E0E0">
+          <div style="font-weight:800;color:var(--navy)">🎬 Clippers</div>
+          <div class="small" style="margin:4px 0 12px">Make the value of Care+ feel real through short-form, relatable content</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:10px 12px;border:1px solid var(--line)"><span style="font-size:20px">📸</span><div><div style="font-weight:800;color:var(--navy);font-size:13px">IG Reels</div><div style="font-size:12.5px;color:#24344D">Build consideration through relatable, value-led content.</div></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:10px 12px;border:1px solid var(--line)"><span style="font-size:20px">🎵</span><div><div style="font-weight:800;color:var(--navy);font-size:13px">TikTok</div><div style="font-size:12.5px;color:#24344D">Drive reach through raw, relatable conversations.</div></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:10px 12px;border:1px solid var(--line)"><span style="font-size:20px">▶️</span><div><div style="font-weight:800;color:var(--navy);font-size:13px">YouTube Shorts</div><div style="font-size:12.5px;color:#24344D">Extend reach through bite-sized product stories.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c12 hero" style="display:none"><div class="label">Business Objective</div><p class="body" style="font-size:18px;margin-top:6px">Build awareness and stronger consideration of Samsung Care+ when consumers purchase Samsung smartphone.</p></div>
+
+    <div class="card c6" style="display:none"><h3>Highlight CxP</h3><div class="icon-row" id="cxpIcons"></div><div class="hr"></div><div class="label">Key Comms</div><span class="chip dark" style="font-size:14px;padding:8px 16px;margin-top:8px">Upgrade with Care</span></div>
+
+    <div class="card c6" style="display:none"><h3>Target Audience</h3>
+      <div class="grid">
+        <div class="c6 persona" style="height:auto"><div class="ico">🆕</div><h4>New Users</h4><div class="small" style="margin-bottom:8px">Turn protection into part of the Samsung purchase from Day 1</div><div class="usp" id="tgtNew"></div></div>
+        <div class="c6 persona" style="height:auto"><div class="ico">📲</div><h4>Current Users</h4><div class="small" style="margin-bottom:8px">Remind them that protection is still a relevant part of owning their Samsung Galaxy</div><div class="usp" id="tgtCur"></div></div>
+      </div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>Digital Channel</h3>
+      <div class="grid">
+        <div class="c4"><div class="label" style="margin-bottom:8px">Digital Own Assets</div><div class="flow" style="grid-template-columns:1fr" id="funnelOwn"></div></div>
+        <div class="c4"><div class="label" style="margin-bottom:8px">Clippers</div><div class="small" style="margin-bottom:8px">Make the value of Care+ feel real through short-form, relatable content</div><div class="usp" id="clippers"></div></div>
+        <div class="c4"><div class="label" style="margin-bottom:8px">KOL</div><div class="small" style="margin-bottom:8px">Build trust and make Care+ feel relevant to everyday Galaxy ownership</div><div class="usp" id="kolTypes"></div></div>
+      </div>
+    </div>
+
+    <div class="card c12"><h3>Content Pillar</h3>
+      <div class="chev" id="oaChev"></div>
+      <div class="grid" style="margin-top:14px" id="oaItems"></div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>OA Content Framework</h3>
+      <div class="grid">
+        <div class="c12 hero" style="border-radius:16px;padding:16px 18px"><div class="label">Main Comms</div><p class="body" style="color:#fff;font-size:20px;font-weight:700">#CarePlusDramaMinus</p><p class="body" style="color:#fff">Less worry. Less drama. More reasons to enjoy your Galaxy.</p></div>
+        <div class="c12"><div class="icon-row" id="usp3"></div></div>
+        <div class="c12"><div class="label" style="margin-bottom:8px">Timeline</div><div class="icon-row" id="oaTimeline"></div></div>
+      </div>
+      <div class="note">NoP: 4 contents AON</div>
+    </div>
+
+    <div class="card c12"><h3>Short Form Clippers Framework</h3><div class="sub">Timeline W41–W53 · 5 Oct – 31 Dec 2026</div><div class="scroll"><div id="clipperMatrix" style="min-width:820px"></div></div></div>
+
+    <div class="card c12" style="display:none"><h3>Content List · Timeline per Week</h3>
+      <div class="scroll"><div class="gantt" id="contentGantt" style="min-width:900px"></div></div>
+      <div class="note">Dot = one content. Items 9–11 (KV AH) have live date TBC and are not shown on the timeline.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 INFLUENCERS ============ -->
+<section class="page" id="influencers">
+  <div class="topbar"><div><div class="kicker">06 · Influencers</div><h2>Influencer Strategic Framework</h2><p>Reframing Samsung Care+ from an “extra cost” into a smart investment for Galaxy Flagship (S26 &amp; Z Series).</p></div><span class="pill">Budget Rp 300,000,000</span></div>
+  <div class="grid">
+    <div class="card c12" style="margin-bottom:0;order:-2"><div class="icon-row" id="infTotals"></div></div>
+    <div class="card c12" style="background:#fff">
+      <h3>Influencer Strategic Framework</h3>
+      <div class="hero" style="border-radius:16px;padding:18px 20px;margin-bottom:16px">
+        <div class="label">🎯 Objective</div>
+        <p class="body" style="color:#fff;font-size:16px;margin-top:6px">To reframe Samsung Care+ from an unwanted extra cost into a smart, value-protecting investment for Galaxy Flagship (S26 &amp; Z Series) owners from day one.</p>
+      </div>
+
+      <div class="label" style="margin-bottom:8px">📦 Product CXP</div>
+      <div class="icon-row" style="margin-bottom:16px">
+        <div class="icon-card"><div class="ic">🛡️</div><b>Coverage</b><span>ADLD, <b style="color:var(--cobalt)">Crack Screen</b></span></div>
+        <div class="icon-card"><div class="ic">⏳</div><b>Duration of Use</b><span>1 YR, 2 YR, <b style="color:var(--cobalt)">+3 months in SES</b>, monthly in eStore</span></div>
+        <div class="icon-card"><div class="ic">🪟</div><b>Window Purchase</b><span><b style="color:var(--cobalt);font-size:16px">60 days</b></span></div>
+      </div>
+
+      <div style="background:var(--grad);border-radius:16px;padding:18px;color:#fff;text-align:center;margin-bottom:16px">
+        <div class="label" style="color:rgba(255,255,255,.8)">📣 Main Communication</div>
+        <div style="font-size:22px;font-weight:800;margin-top:6px;letter-spacing:.02em">#UPGRADEWITHCARE</div>
+        <div style="font-style:italic;margin-top:4px;font-size:15px">"Less worry. Less drama. More reasons to enjoy your Galaxy."</div>
+      </div>
+
+      <div class="label" style="margin-bottom:8px">⚠️ Key Challenges</div>
+      <div class="icon-row" style="margin-bottom:16px">
+        <div class="icon-card" style="text-align:left"><div class="ic">💸</div><b>Perceived Extra Cost</b><span>Consumers hesitate because it feels like an unnecessary extra expense on an already expensive flagship.</span></div>
+        <div class="icon-card" style="text-align:left"><div class="ic">📉</div><b>Low Attachment Rate <span style="color:#E08A00;font-size:15px">(3.9%)</span></b><span>Consumers don't expect accidents and perceive protection as irrelevant until it actually happens.</span></div>
+        <div class="icon-card" style="text-align:left"><div class="ic">⏳</div><b>Post-Purchase Friction</b><span>Missed opportunity at point-of-sale and low awareness of the <b style="color:var(--cobalt)">60-day “second-chance”</b> buying window.</span></div>
+      </div>
+
+      <div class="label" style="margin-bottom:8px">🧭 Strategy Approach</div>
+      <div class="chev">
+        <div style="background:#1428A0"><h4>① Multi-Tier KOL Deployment</h4><p>Deploy Macro &amp; Micro KOLs to build broad awareness and social proof for S26 &amp; Z Series.</p><div class="chip" style="background:rgba(255,255,255,.2);color:#fff;margin-top:8px">Awareness</div></div>
+        <div style="background:#1F5BFF"><h4>② Problem-Solving &amp; Value Education</h4><p>Shift mindset from "extra cost" to "smart cost control" by educating on real damage risks (<b>44% screen cracks</b>) &amp; repair savings.</p><div class="chip" style="background:rgba(255,255,255,.2);color:#fff;margin-top:8px">Education &amp; Consideration</div></div>
+        <div style="background:#4C84FF"><h4>③ Digital-to-Retail Amplification</h4><p>Own high-performing KOL videos for in-store retail screen playback across SES stores.</p><div class="chip" style="background:rgba(255,255,255,.2);color:#fff;margin-top:8px">Consideration &amp; Conversion</div></div>
+        <div style="background:#0B1F3A"><h4>④ Phased Offer &amp; Conversion Alignment</h4><p>Synchronize KOL messaging with monthly promos.</p><div class="chip" style="background:rgba(255,255,255,.2);color:#fff;margin-top:8px">Conversion</div></div>
+      </div>
+    </div>
+
+    <div class="card c12 hero" style="display:none"><div class="label">Objective</div><p class="body" style="font-size:16px;margin-top:6px">To reframe Samsung Care+ from an unwanted extra cost into a smart, value-protecting investment for Galaxy Flagship (S26 &amp; Z Series) owners from day one.</p>
+      <div class="icon-row" style="margin-top:14px" id="infraCxp"></div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>Main Communication</h3><p class="body" style="font-size:18px;font-weight:700;color:var(--cobalt)">#UPGRADEWITHCARE</p><p class="quote">“Less worry. Less drama. More reasons to enjoy your Galaxy.”</p></div>
+
+    <div class="card c12" style="display:none"><h3>Key Challenges</h3>
+      <div class="grid">
+        <div class="c4"><div class="persona" style="height:auto"><div class="ico">💸</div><h4>Perceived Extra Cost</h4><p class="small" style="font-size:13px;color:#24344D">Consumers hesitate because it feels like an unnecessary extra expense on an already expensive flagship.</p></div></div>
+        <div class="c4"><div class="persona" style="height:auto"><div class="ico">📉</div><h4>Low Attachment Rate (3.9%)</h4><p class="small" style="font-size:13px;color:#24344D">Consumers don't expect accidents and perceive protection as irrelevant until it actually happens.</p></div></div>
+        <div class="c4"><div class="persona" style="height:auto"><div class="ico">⏳</div><h4>Post-Purchase Friction</h4><p class="small" style="font-size:13px;color:#24344D">Missed opportunity at point-of-sale and low awareness of the 60-day “second-chance” buying window.</p></div></div>
+      </div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>Strategy Approach</h3>
+      <div class="chev">
+        <div style="background:#1428A0"><h4>Multi-Tier KOL Deployment</h4><p>Macro &amp; Micro KOLs build broad awareness &amp; social proof for S26 &amp; Z Series. <b>(Awareness)</b></p></div>
+        <div style="background:#1F5BFF"><h4>Problem-Solving &amp; Value Education</h4><p>From “extra cost” to “smart cost control”, 44% screen cracks &amp; repair savings. <b>(Education &amp; Consideration)</b></p></div>
+        <div style="background:#4C84FF"><h4>Digital-to-Retail Amplification</h4><p>Own KOL videos for in-store screen playback across SES. <b>(Consideration &amp; Conversion)</b></p></div>
+        <div style="background:#0B1F3A"><h4>Phased Offer &amp; Conversion Alignment</h4><p>Synchronize KOL messaging with monthly promos. <b>(Conversion)</b></p></div>
+      </div>
+    </div>
+
+    <div class="card c12" style="order:-1"><h3>Influencer Pillars &amp; Target</h3>
+      <div class="grid">
+        <div class="c6"><div class="chev" style="border-radius:14px"><div style="background:#0B1F3A;flex:1"><h4>01 · PRODUCT ENGAGEMENT</h4><p>Upgrade with Care: More Peace of Mind with Samsung Care+</p></div></div>
+          <div class="icon-row" style="margin-top:12px" id="pillar1Stats"></div>
+          <div class="small" style="margin-top:10px"><b>Story:</b> How-To upgrade to SC+ via online monthly subscription · How to claim process</div></div>
+        <div class="c6"><div class="chev" style="border-radius:14px"><div style="background:#0B1F3A;flex:1"><h4>02 · STORE TRAFFIC GENERATION</h4><p>Upgrade with Care: More Peace of Mind with Samsung Care+</p></div></div>
+          <div class="icon-row" style="margin-top:12px" id="pillar2Stats"></div>
+          <div class="small" style="margin-top:10px"><b>Story:</b> Switcher visits SES to upgrade to Galaxy and purchase SC+ · Galaxy users visits SES to claim SC+ full protection benefits, assisted by promotor</div></div>
+      </div>
+      <div class="hr"></div>
+      
+    </div>
+
+    <div class="card c12"><h3>Influencers Persona · KOL Suggestion</h3>
+      <div class="grid" id="personaGrid"></div>
+    </div>
+
+    <div class="card c12"><h3>Influencers Content Pillar &amp; Approach</h3>
+      <div class="grid" id="pillarContent"></div>
+    </div>
+
+    <div class="card c12"><h3>Roll Out Influencer per Fase</h3><div id="infRollout"></div></div>
+  </div>
+</section>
+
+<!-- ============ 07 PR ============ -->
+<section class="page" id="pr">
+  <div class="topbar"><div><div class="kicker">07 · PR</div><h2>PR Activity, Media Plan &amp; Tech Reviewer</h2><p>Editor pitch, tech reviewer collab, publication timeline, and content focus.</p></div><span class="pill" style="display:none">Total PR Buzz 126</span></div>
+  <div class="grid">
+    <div class="card tile" style="grid-column:span 2"><div class="label">PR Buzz</div><div class="val">126</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">Media Clips</div><div class="val">100</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">NoK</div><div class="val">12</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">NoP</div><div class="val">26</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">PO Reach</div><div class="val">11.8M</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">Views</div><div class="val">470K</div></div>
+    
+    
+    
+
+    <div class="card c12" style="background:#fff">
+      <h3>Communication Framework · Campaign</h3>
+      <div style="background:linear-gradient(90deg,#0B0B0B,#3A3A3A 50%,#8A8A8A);color:#fff;border-radius:14px;padding:16px;text-align:center;font-weight:800;letter-spacing:.1em;font-size:20px;margin-bottom:14px">📣 UPGRADE WITH CARE</div>
+
+      <div style="background:linear-gradient(180deg,#F5F5F5,#E4E4E4);border-radius:14px;padding:16px 18px;margin-bottom:16px;border:1px solid #D0D0D0">
+        <div class="label" style="color:#555">🔑 Key Message</div>
+        <p style="font-size:15px;font-weight:700;color:#1E1E1E;margin-top:6px">Upgrade your life with a new Galaxy through Samsung Care+ and attractive Trade-In Offers, giving you more value, more benefits, and greater peace of mind throughout your upgrade journey.</p>
+      </div>
+
+      <div class="label" style="margin-bottom:8px">🧩 Message Pillars &amp; Proof Points</div>
+      <div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div style="border-radius:14px;overflow:hidden;border:1px solid #D0D0D0">
+          <div style="background:linear-gradient(90deg,#111,#4A4A4A);color:#fff;padding:12px 14px;font-weight:800;font-size:13px;letter-spacing:.04em">ENJOY GREATER PEACE OF MIND WITH SAMSUNG CARE+</div>
+          <div style="background:linear-gradient(90deg,#9A9A9A,#D6D6D6);padding:10px 14px;font-weight:700;font-size:12.5px;color:#1E1E1E;text-align:center">Make every Galaxy upgrade more reassuring with added protection that helps consumers enjoy their new devices with greater confidence.</div>
+          <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;font-size:13px;color:#24344D">
+            <div style="display:flex;gap:10px"><span style="font-size:18px">🛡️</span><span><b>Full Protection:</b> Two-year Samsung Care+ Full Protection with savings of up to <b style="background:#FFF1C7;padding:1px 6px;border-radius:6px;color:#8A5A00">Rp900,000</b>, subject to applicable terms.</span></div>
+            <div style="display:flex;gap:10px"><span style="font-size:18px">💥</span><span><b>Accidental Damage &amp; Liquid Damage:</b> Protection against covered accidental and liquid damage, according to the selected plan.</span></div>
+            <div style="display:flex;gap:10px"><span style="font-size:18px">🔒</span><span><b>Confidence Beyond Purchase:</b> Extend the value of a Galaxy purchase through additional device protection.</span></div>
+            <div style="display:flex;gap:10px"><span style="font-size:18px">😌</span><span><b>Worry Less, Enjoy More:</b> Help consumers feel more confident using and enjoying their new Galaxy.</span></div>
+          </div>
+        </div>
+        <div style="border-radius:14px;overflow:hidden;border:1px solid #D0D0D0">
+          <div style="background:linear-gradient(90deg,#111,#4A4A4A);color:#fff;padding:12px 14px;font-weight:800;font-size:13px;letter-spacing:.04em">MAKE YOUR GALAXY UPGRADE MORE REWARDING</div>
+          <div style="background:linear-gradient(90deg,#9A9A9A,#D6D6D6);padding:10px 14px;font-weight:700;font-size:12.5px;color:#1E1E1E;text-align:center">Complement the Samsung Care+ proposition with attractive trade-in offers and promotional benefits that make upgrading to a new Galaxy more accessible.</div>
+          <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;font-size:13px;color:#24344D">
+            <div style="display:flex;gap:10px"><span style="font-size:18px">🔄</span><span><b>Trade-In Value:</b> Trade-in cashback, subject to applicable terms.</span></div>
+            <div style="display:flex;gap:10px"><span style="font-size:18px">🎉</span><span><b>Galaxy Upgrade Festival:</b> Promotional benefits that add value to upgrading to a new Galaxy.</span></div>
+            <div style="display:flex;gap:10px"><span style="font-size:18px">📱</span><span><b>Product Choice:</b> Different Galaxy experiences across Galaxy Z Fold8, Galaxy S26 Ultra, and Galaxy S26 FE to suit different consumer needs.</span></div>
+            <div style="display:flex;gap:10px"><span style="font-size:18px">🎁</span><span><b>Added Purchase Benefits:</b> Highlight applicable offers that enhance the overall value of upgrading.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c6"><h3>PR Media Plan</h3>
+      <div class="flow" style="grid-template-columns:1fr 1fr">
+        <div class="node"><div class="no">1</div><h4>PR Story</h4><p>Highlight Samsung Care+ Full Protection and covered accidental and liquid damage to reinforce peace of mind when owning a Galaxy, supported by GUF benefits.</p></div>
+        <div class="node"><div class="no">2</div><h4>Editor Pitch</h4><p>Engage media partners to build Samsung Care+ consideration through consumer-focused stories on device protection and peace of mind.</p></div>
+      </div>
+      <div style="margin-top:12px" id="outlets"></div>
+    </div>
+    <div class="card c6"><h3>02 · Tech Reviewer Collab</h3>
+      <p class="body"><b>Objectives:</b> Inform the audience about the convenience and benefits of trading in Samsung devices, with extra protection through Samsung Care+.</p>
+      <div class="grid" style="margin-top:14px">
+        <div class="c4" style="text-align:center"><div class="ring" style="margin:0 auto;width:96px;height:96px"><svg width="96" height="96"><circle class="track" cx="48" cy="48" r="40"/><circle class="prog" data-ring="100" cx="48" cy="48" r="40" stroke-dasharray="251.3" stroke-dashoffset="251.3"/></svg><div class="txt" style="font-size:14px">26</div></div><div class="small" style="margin-top:6px">NoP</div></div>
+        <div class="c4" style="text-align:center"><div class="ring" style="margin:0 auto;width:96px;height:96px"><svg width="96" height="96"><circle class="track" cx="48" cy="48" r="40"/><circle class="prog" data-ring="100" cx="48" cy="48" r="40" stroke-dasharray="251.3" stroke-dashoffset="251.3"/></svg><div class="txt" style="font-size:13px">11.8M</div></div><div class="small" style="margin-top:6px">PO Reach</div></div>
+        <div class="c4" style="text-align:center"><div class="ring" style="margin:0 auto;width:96px;height:96px"><svg width="96" height="96"><circle class="track" cx="48" cy="48" r="40"/><circle class="prog" data-ring="100" cx="48" cy="48" r="40" stroke-dasharray="251.3" stroke-dashoffset="251.3"/></svg><div class="txt" style="font-size:13px">470K</div></div><div class="small" style="margin-top:6px">Views</div></div>
+      </div>
+    </div>
+
+    <div class="card c12" style="order:99"><h3>Activity Phasing · W47–W50</h3><div class="scroll"><div class="gantt" id="prGantt" style="min-width:700px"></div></div></div>
+
+    <div class="card c12"><h3>PR Media Plan · Week 46 (10 Nov 2026) &amp; Week 46–47 (12–19 Nov 2026)</h3>
+      <div class="grid">
+        <div class="c4 persona" style="height:auto"><div class="ico">📰</div><h4>PR Story Angle</h4><div class="q">Upgrade with Care: Why Protection Matters When Choosing Your Next Galaxy</div><div class="usp" id="prStory"></div></div>
+        <div class="c4 persona" style="height:auto"><div class="ico">📱</div><h4>Galaxy Z8 · Editor Pitch</h4><div class="q">Upgrading to Galaxy Z Fold8? Why Samsung Care+ Should Be Part of Your Next Upgrade</div><div class="label" style="margin-bottom:6px">Proof Points</div><div class="usp" id="ppZ8"></div><div class="label" style="margin:10px 0 6px">Utility Information</div><div class="usp" id="uiZ8"></div><div style="margin-top:8px"><span class="chip">Jawa Pos</span><span class="chip">Kompas Tekno</span></div></div>
+        <div class="c4 persona" style="height:auto"><div class="ico">📸</div><h4>Galaxy S26 Ultra · Editor Pitch</h4><div class="q">More Than an Upgrade: Enjoy Galaxy S26 Ultra with Greater Peace of Mind</div><div class="label" style="margin-bottom:6px">Proof Points</div><div class="usp" id="ppUltra"></div><div class="label" style="margin:10px 0 6px">Utility Information</div><div class="usp" id="uiUltra"></div><div style="margin-top:8px"><span class="chip">Jpnn</span></div></div>
+        <div class="c12 persona" style="height:auto"><h4>Galaxy S26 FE · Editor Pitch</h4><div class="q">Upgrade with Care: Enjoy Galaxy S26 FE with Added Protection and Peace of Mind</div>
+          <div class="grid"><div class="c6"><div class="label" style="margin-bottom:6px">Proof Points</div><div class="usp" id="ppFE"></div></div><div class="c6"><div class="label" style="margin-bottom:6px">Utility Information</div><div class="usp" id="uiFE"></div><div style="margin-top:8px"><span class="chip">Antaranews</span></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c12"><h3>Tech Reviewer Plan · PO Reach per Reviewer</h3><div class="sub">With NoK, NoP, and Views per reviewer</div><div id="reviewerGrid"></div><div id="reviewerBars" style="display:none"></div>
+      <div class="note">Total NoK 12 · NoP 26 · PO Reach 11.8M · Views 470K.</div>
+    </div>
+
+    <div class="card c12"><h3>Tech Reviewers Timeline</h3><div id="reviewerWeeks"></div></div>
+    <div class="card c12" style="display:none"><h3>Tech Reviewers Timeline</h3><div class="scroll"><div class="gantt" id="reviewerTl" style="min-width:820px"></div></div>
+      
+    </div>
+
+    <div class="card c12"><h3>Tech Reviewer Content Focus · Alur 6 Tahap</h3>
+      <div class="flow" id="contentFocus" style="grid-template-columns:repeat(6,minmax(0,1fr))"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 RETAIL ============ -->
+<section class="page" id="retail">
+  <div class="topbar"><div><div class="kicker">08 · Retail</div><h2>Retail Visibilities Plan</h2><p>In-Store visibilities during the campaign will be focused on SES and SES-P</p></div><span class="pill" style="display:none">246 SES · 572 SES-P</span></div>
+  <div class="grid">
+    <div class="c12" style="padding:6px 4px 0"><div style="font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-.01em">Samsung Care+ In-Store Programs</div></div>
+    <div class="c12" style="order:-2"><img src="https://res.cloudinary.com/rolpld3f/image/upload/v1794371772/Screenshot_2026-11-11_092633.png" alt="Samsung Care+ In-Store Programs" loading="lazy" style="width:100%;border-radius:16px;border:1px solid var(--line)"></div>
+    <div class="card c6"><h3>1 · Margin for Store &amp; Dealer Increased</h3><div id="marginBars"></div>
+      <div class="chip" style="margin-top:6px">Margin from RRP Excl Tax</div><div class="chip">Distributed monthly</div></div>
+    <div class="card c6"><h3>2 · Appealing Incentives Scheme</h3><div id="incentiveBars"></div><div class="chip" style="margin-top:6px">Incentives for EC</div><div class="chip">Multiplier applied</div></div>
+
+    <div class="card c6"><h3>3 · Attractive Racing Program</h3>
+      <div class="label" style="margin-bottom:6px">Previous Racing Program</div>
+      <div class="flow" style="grid-template-columns:repeat(3,1fr)"><div class="node"><h4>Club 40</h4><p>for NASA</p></div><div class="node"><h4>Club 20</h4><p>for GTN &amp; MHI</p></div><div class="node"><h4>Club 10</h4><p>for Traditional Stores</p></div></div>
+      <div class="label" style="margin:12px 0 6px">Upcoming Racing Program</div>
+      <div class="icon-row"><div class="icon-card"><div class="ic">🏬</div><b>ORG &amp; Tradi</b><span>active stores</span></div><div class="icon-card"><div class="ic">🏆</div><b>Flagship %AR</b></div><div class="icon-card"><div class="ic">📊</div><b>MMH %AR</b></div></div>
+    </div>
+    <div class="card c6"><h3>4 · Competitive Price</h3>
+      <div class="grid">
+        <div class="c6"><div class="chev"><div style="background:#1428A0;flex:1"><h4>Samsung Care+</h4><p>Fixed RRP per device band</p></div></div><ul class="usp" style="margin-top:10px"><div><span class="dot2">•</span>Fixed deductible fee</div><div><span class="dot2">•</span>Repair fee: Cashless</div></ul></div>
+        <div class="c6"><div class="chev"><div style="background:#8A94A6;flex:1"><h4>Competitor Q &amp; B</h4><p>Price depends on Device RRP</p></div></div><ul class="usp" style="margin-top:10px"><div><span class="dot2" style="background:#8A94A6">•</span>Deductible fee 5% from service value</div><div><span class="dot2" style="background:#8A94A6">•</span>Repair fee: Reimbursement</div></ul></div>
+      </div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>Channel to Purchase Samsung Care+</h3>
+      <div class="grid">
+        <div class="c4"><div class="persona" style="height:auto;border-top:none"><div class="ico" style="background:#E4F7EF">🏪</div><h4 style="color:#117A52">Offline Channel</h4>
+          <div class="bars" style="margin-top:8px"><div class="brow" style="grid-template-columns:1fr 1fr 48px"><span class="nm">Offline Stores</span><span></span><span class="v">90%</span></div>
+          <div class="track2" style="height:10px"><div class="fill" data-w="90" style="background:#117A52"></div></div>
+          <div class="small">Exclusive &amp; Multi Brand shop</div>
+          <div class="track2" style="height:10px;margin-top:6px"><div class="fill" data-w="5" style="background:#117A52"></div></div><div class="small">Finance+ by Kredivo · 5%</div></div>
+          <div class="small" style="margin-top:12px">Authorized Service Center · <span class="chip good">Re-activate</span><span class="chip warn">NEW</span></div>
+        </div></div>
+        <div class="c4"><div class="persona" style="height:auto"><div class="ico" style="background:#F1E6FB">🌐</div><h4 style="color:#7A2FA8">Online Channel</h4><div class="small" style="margin-top:6px">Samsung.com</div><div class="q" style="margin-top:8px">Standalone · Access via Samsung.com Web (Not Bundle)</div></div></div>
+        <div class="c4"><div class="persona" style="height:auto"><div class="ico" style="background:#FDEBDD">🎁</div><h4 style="color:#D9824B">Special Channel</h4><div class="small" style="margin-top:6px">Samsung Gift Indonesia</div><div class="small">Preloaded Apps in your Galaxy</div><div class="q" style="margin-top:8px">Standalone · Warranty &amp; Care+ <span class="chip warn">NEW</span></div></div></div>
+      </div>
+      <div class="note">Slide sumber hanya menampilkan 90% (Offline Stores) dan 5% (Finance+). Sisa persentase (2%, 2%, 1%) tidak bisa dipetakan secara pasti.</div>
+    </div>
+
+    <div class="card c4 hero" style="order:-4"><h3>Store Coverage</h3>
+      <div class="donut-row" style="justify-content:center">
+        <div class="ring" style="width:130px;height:130px"><svg width="130" height="130"><circle class="track" cx="65" cy="65" r="55" style="stroke:rgba(255,255,255,.2)"/><circle class="prog" data-ring="100" cx="65" cy="65" r="55" stroke-dasharray="345.6" stroke-dashoffset="345.6" style="stroke:#fff"/></svg><div class="txt" style="color:#fff;flex-direction:column;font-size:12px">SES<b style="font-size:22px">246</b></div></div>
+        <div class="ring" style="width:130px;height:130px"><svg width="130" height="130"><circle class="track" cx="65" cy="65" r="55" style="stroke:rgba(255,255,255,.2)"/><circle class="prog" data-ring="100" cx="65" cy="65" r="55" stroke-dasharray="345.6" stroke-dashoffset="345.6" style="stroke:#A7D8FF"/></svg><div class="txt" style="color:#fff;flex-direction:column;font-size:12px">SES-P<b style="font-size:22px">572</b></div></div>
+      </div>
+      <div class="small" style="color:rgba(255,255,255,.85);margin-top:10px">*Subject to discuss, if ADLC agree to switch the Trade In KV with SC+</div>
+    </div>
+
+    <div class="card c8" style="order:-3"><h3>Printed POSM Budget Plan · 3 Months</h3><div id="posmBars"></div>
+      <div class="donut-row" style="margin-top:10px"><span class="chip">RDU (RMS) · pemakaian digital</span><span class="chip dark">Grand Total 3 Months · Rp 170,000,000</span></div>
+      
+    </div>
+
+    <div class="card c12" style="order:-1"><h3>SC+ Touchpoint</h3><div id="touchMatrix"></div></div>
+
+    <div class="card c12" style="display:none"><h3>Execution Timeline · Oktober – November 2026</h3>
+      <div class="scroll"><div class="gantt" id="retailGantt" style="min-width:900px"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 ROLL OUT ============ -->
+<section class="page" id="rollout">
+  <div class="topbar"><div><div class="kicker">09 · Roll Out</div><h2>Campaign Roll Out Plan</h2><p>Samsung Care+ campaign will be roll out focus on Nov – Dec 2026 with highlighting Key messaging on Full Protection, Price Drop, Transfer Policy &amp; Global Repair</p></div><span class="pill">W45 – W53</span></div>
+  <div class="grid">
+    <div class="card c6"><h3>Target SC+</h3><div id="rolloutTargetSC"></div></div>
+    <div class="card c6"><h3>Target Rev ($)</h3><div id="rolloutTargetRev"></div></div>
+    <div class="card c6"><h3>Key Messaging · NOV ’26</h3><div class="chev" id="kmNov"></div></div>
+    <div class="card c6"><h3>Key Messaging · DEC ’26</h3><div class="chev" id="kmDec"></div></div>
+
+    <div class="card c12"><h3>Campaign Roll Out Plan · Gantt</h3>
+      <div class="scroll"><div class="gantt" id="rolloutGantt" style="min-width:920px"></div></div>
+      <div class="note">Influencer: Product Engagement 8 NoP · 2.0% IER · 1M PO Reach; Store Traffic 10 NoP · 2.0% IER · 1.8M PO Reach. Retail: 246 SES | 572 SES-P.</div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>Campaign Roll Out · All Phase</h3>
+      <div class="chev" id="phaseChev"></div>
+      <div class="grid" style="margin-top:14px" id="phaseDetail"></div>
+      <div class="warnbox">Slide 34 menaruh Care Starts Here di Oktober, sedangkan slide 43 mulai W46 (November). Perlu dikonfirmasi.</div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>Influencer Roll Out</h3><div class="icon-row" id="rolloutKOL"></div></div>
+  </div>
+</section>
+
+<!-- ============ 10 KPI ============ -->
+<section class="page" id="kpi">
+  <div class="topbar"><div><div class="kicker">10 · KPI</div><h2>Budget vs KPI</h2><p>Samsung Care+ marketing budget allocated dominantly on digital with 30% on Influencers, 30% on Tech Reviewers &amp; 30% on Short Form content</p></div><span class="pill">Total Budget Rp 1,000,000,000</span></div>
+  <div class="grid">
+    <div class="card c6"><h3>Budget Split</h3>
+      <div class="donut-row"><div class="donut" id="donutBudget"></div><div class="dleg" id="budgetLeg"></div></div>
+    </div>
+    <div class="card c6"><h3>Business Target</h3>
+      <div class="grid">
+        <div class="c6 hero tile" style="border-radius:16px"><div class="label">Conversion</div><div class="val" style="color:#fff">46,037</div></div>
+        <div class="c6 hero tile" style="border-radius:16px"><div class="label">Revenue</div><div class="val" style="color:#fff">583,869</div></div>
+      </div>
+      <div class="small" style="margin-top:10px">Conversion = SC+ Nov + Des (19.085 + 26.952 = 46.037). Revenue = Rev Nov + Des (240.828 + 343.041 = 583.869). Cocok.</div>
+    </div>
+
+    <div class="card c12" style="background:transparent;box-shadow:none;border:none;padding:0"><div id="q4Plan"></div></div>
+    <div class="card c12" style="display:none"><h3>Budget vs KPI · Samsung Care+ Q4 Paid Media Plan</h3>
+      <div class="grid" id="bvkCards"></div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>Digital KPI · Samsung Care+</h3>
+      <div id="digitalKPI"></div>
+      <div class="warnbox">Kolom “Samsung Care+” nilainya sama dengan target di tabel Budget vs KPI (Buzz 7.977, AEP 1.077, NoP 13), kemungkinan ini target. Index = Samsung Care+ ÷ N-1. Typo “Shor Form” di sumber ditampilkan sebagai “Short Form”.</div>
+    </div>
+
+    <div class="card c12" style="display:none"><h3>Influencers KPI · Samsung Wallet vs KPI</h3>
+      <div id="infKPI"></div>
+      <div class="warnbox">Index di tabel ini (PO Reach 0,4x, NOP 0,6x) lebih kecil meskipun aktual Samsung Wallet lebih tinggi dari KPI. Rumus indeks berbeda dari tabel Digital. Perlu disamakan.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* ============================================================
+   HELPER
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const fmt = n => n.toLocaleString('id-ID');
+const IMG = {
+  friderica:'https://res.cloudinary.com/rolpld3f/image/upload/v1793779256/fridericiana.jpg',
+  khansa:'https://res.cloudinary.com/rolpld3f/image/upload/v1793354455/drg_khansa.jpg',
+  cipop:'https://res.cloudinary.com/rolpld3f/image/upload/v1793779268/cipopz.jpg',
+  abimorris:'https://res.cloudinary.com/rolpld3f/image/upload/v1793779258/abigail.jpg',
+  rezafebs:'https://res.cloudinary.com/rolpld3f/image/upload/v1793779260/rezafebs.jpg',
+  joshua:'https://res.cloudinary.com/rolpld3f/image/upload/v1793779263/josua.jpg',
+  claralianis:'https://res.cloudinary.com/rolpld3f/image/upload/v1793779265/clara_lianis.jpg',
+  gabrieladesta:'https://res.cloudinary.com/rolpld3f/image/upload/v1793779256/gabriela_desta.jpg',
+  tessyvalensia:'https://res.cloudinary.com/rolpld3f/image/upload/v1793779592/tessyvalensia.jpg',
+  dhiarcom:'https://res.cloudinary.com/rolpld3f/image/upload/v1793354453/dhiarcom.jpg',
+  dkidmedia:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780385/dkid.png',
+  sobathape:'https://res.cloudinary.com/rolpld3f/image/upload/v1793351782/sobat_hape.jpg',
+  bestindotech:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780434/bestindotech.jpg',
+  wasawirman:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780439/wasawirman.jpg',
+  sadapintekno:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780412/sadapintekno.jpg',
+  gadgetfren:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780428/gadgetfren.jpg',
+  taufiknobo:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780424/taufiknobo.jpg',
+  bertustustus:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780396/bertustustus.jpg',
+  gadgetapa:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780401/gadgetapaa.jpg',
+  bangjoereview:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780406/bangjoereview.jpg',
+  adimology:'https://res.cloudinary.com/rolpld3f/image/upload/v1793780390/adimology.jpg',
+  jawapos:'https://upload.wikimedia.org/wikipedia/commons/2/26/Jawa_Pos.png',
+  jpnn:'https://upload.wikimedia.org/wikipedia/commons/5/5e/Logo_JPM_Jawapos.png',
+  antaranews:'https://thumb.wikimedia.org/wikipedia/en/thumb/0/0e/Antara_%28news_agency%29_logo.svg/1280px-Antara_%28news_agency%29_logo.svg.png',
+  kompastekno:'https://yt3.googleusercontent.com/Mg4h50htYCV3sOCTR5SQvpNG_ulFAl-qbLEe-KZqDiiLEiM6JaV3v1gwgOKo_A6tEGecYMEw7w=s900-c-k-c0x00ffffff-no-rj'
+};
+const keyOf = n => n.toLowerCase().replace(/[^a-z]/g,'');
+function logo(n,s=22){ const u=IMG[keyOf(n)]; return u?`<img src="${u}" alt="${n}" loading="lazy" style="width:${s}px;height:${s}px;border-radius:8px;object-fit:contain;background:#fff;flex:none">`:''; }
+function kolAv(n,ini,s){ const u=IMG[keyOf(n)]; return u?`<img src="${u}" alt="${n}" loading="lazy" style="width:${s}px;height:${s}px;border-radius:50%;object-fit:cover;margin:0 auto 8px;display:block">`:`<div class="avatar" style="width:${s}px;height:${s}px;font-size:13px">${ini}</div>`; }
+
+function animateWidths(root){
+  if(!root) return;
+  root.querySelectorAll('[data-w]').forEach(el=>{
+    el.style.width='0%';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ el.style.width=el.dataset.w+'%'; }));
+  });
+  root.querySelectorAll('[data-ring]').forEach(el=>{
+    const pct = parseFloat(el.dataset.ring);
+    const c = parseFloat(el.getAttribute('stroke-dasharray'));
+    el.style.strokeDashoffset = c;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      el.style.strokeDashoffset = c - (c * Math.min(pct,100) / 100);
+    }));
+  });
+  root.querySelectorAll('[data-h]').forEach(el=>{
+    el.style.height='0px';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ el.style.height=el.dataset.h+'%'; }));
+  });
+}
+
+function barRow(name,val,max,label,color){
+  const w = Math.max(0.5,(val/max)*100);
+  const bg = color ? `background:${color}` : '';
+  return `<div class="brow"><span class="nm" title="${name}">${name}</span><div class="track2"><div class="fill" data-w="${w.toFixed(2)}" style="${bg}"></div></div><span class="v">${label}</span></div>`;
+}
+
+function donut(segs, size=160, centerTop='', centerBottom=''){
+  const r = size/2 - 14, c = 2*Math.PI*r;
+  let off = 0, arcs = '';
+  segs.forEach(s=>{
+    const len = c * s.pct/100;
+    arcs += `<circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${s.color}" stroke-width="22" stroke-dasharray="${len} ${c-len}" stroke-dashoffset="${-off}"/>`;
+    off += len;
+  });
+  return `<div class="donut" style="width:${size}px;height:${size}px"><svg width="${size}" height="${size}">${arcs}</svg><div class="center"><b>${centerTop}</b>${centerBottom}</div></div>`;
+}
+
+/* ============================================================
+   DATA
+   ============================================================ */
+
+// ---- 01 BACKGROUND ----
+function renderBackground(){
+  $('donutChannel').innerHTML = donut([
+    {pct:48.0,color:'#0B1F3A'},{pct:47.1,color:'#1F5BFF'},{pct:4.9,color:'#A7D8FF'}
+  ],160,'48%','SES') + `<div class="dleg" style="margin-top:10px">
+    <div><span><i class="dot" style="background:#0B1F3A"></i>SES</span><b>48.0% · $1,2M</b></div>
+    <div><span><i class="dot" style="background:#1F5BFF"></i>Retail</span><b>47.1% · $310K</b></div>
+    <div><span><i class="dot" style="background:#A7D8FF"></i>eStore</span><b>4.9% · $373K</b></div></div>`;
+
+  $('barDevice').innerHTML = `<div class="bars">${[
+    ['Galaxy A',62.3],['Galaxy S',22.2],['Galaxy Tab',10.8],['Galaxy Z',2.5],['Galaxy Watch',2.2]
+  ].map(([n,v])=>barRow(n,v,100,v+'%')).join('')}</div>`;
+
+  const dur = [['Galaxy A',89,11],['Galaxy S',49,51],['Galaxy Z',77,23],['Galaxy Tab',80,20],['Galaxy Watch',60,40]];
+  $('stackDuration').innerHTML = `<div class="bars">${dur.map(([n,a,b])=>`
+    <div><div class="small" style="margin-bottom:4px"><b style="color:var(--navy)">${n}</b></div>
+      <div class="stack"><span style="background:#0B1F3A" data-w="${a}">${a}%</span><span style="background:#A7D8FF;color:#0B1F3A" data-w="${b}">${b}%</span></div></div>`).join('')}</div>
+    <div class="legend"><span><i style="background:#0B1F3A"></i>1YR</span><span><i style="background:#A7D8FF"></i>2YR</span></div>`;
+
+  $('damageChart').innerHTML = `<div class="bars">${[
+    ['Crack Screen',44,'#E08A00'],['Power Off',23,null],['Port Charger',19,null],['Mic Damage',7,null],['Line on Display',6,null]
+  ].map(([n,v,c])=>barRow(n,v,50,v+'%',c?`linear-gradient(90deg,#E08A00,#FFB547)`:null)).join('')}</div>`;
+
+  const weeks = [
+    {w:'Week 39',no:97.8,noAct:8545,tot:8740,adld:78.5,scr:21.5},
+    {w:'Week 40',no:97.9,noAct:7384,tot:7545,adld:88.2,scr:11.8},
+    {w:'Week 41',no:97.4,noAct:7101,tot:7288,adld:80.2,scr:19.8},
+    {w:'Week 42',no:97.5,noAct:6031,tot:6188,adld:84.1,scr:15.9}
+  ];
+  $('weeklyYesNo').innerHTML = weeks.map(x=>`
+    <div class="brow" style="grid-template-columns:90px 1fr 150px">
+      <span class="nm">${x.w}</span>
+      <div class="track2" style="height:22px;background:#E4F7EF"><div class="fill" data-w="${x.no}" style="background:linear-gradient(90deg,#F4B6B6,#E88A8A)"></div></div>
+      <span class="v" style="font-size:12px">No ${x.no}% · ${fmt(x.noAct)} <span class="small">/ ${fmt(x.tot)}</span></span>
+    </div>`).join('');
+
+  $('weeklyType').innerHTML = `<div class="cols">${weeks.map(x=>`
+    <div class="col"><div class="bar" data-h="${x.adld}" style="height:0"><span>${x.adld}%</span></div></div>`).join('')}</div>
+    <div class="cols" style="height:0;border:none;padding:0"></div>
+    <div style="display:flex;justify-content:space-around;margin-top:6px">${weeks.map(x=>`<div class="lb small">${x.w}</div>`).join('')}</div>`;
+
+  $('donutType').outerHTML = donut([{pct:82.4,color:'#1F5BFF'},{pct:17.6,color:'#E08A00'}],150,'700','selected');
+
+  animateWidths(document.getElementById('background'));
+}
+
+// ---- 02 PRODUCT ----
+function renderProduct(){
+  const cards = [
+    {t:'Type',a:'Product AS IS',b:'New Product',a1:'—',b1:'New Product'},
+    {t:'Coverage',a:'ADLD Only',b:'ADLD, Crack Screen'},
+    {t:'Duration of Use',a:'1 YR & 2 YR',b:'1 YR, 2 YR, + 3 Months in SES, Monthly in eStore'},
+    {t:'Window Purchase',a:'30 Days',b:'60 Days'}
+  ];
+  $('whatsNew').innerHTML = cards.map((c,i)=>`
+    <div class="c3" style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line)">
+      <div style="background:var(--navy);color:#fff;padding:10px 14px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">${c.t}</div>
+      <div style="padding:12px 14px"><div class="small">AS IS</div><div style="font-weight:600;color:#5B6B82;margin-bottom:10px;text-decoration:line-through">${c.a}</div>
+      <div class="small" style="color:#117A52">NEW</div><div style="font-weight:700;color:var(--navy)">${c.b}</div></div>
+    </div>`).join('');
+
+  const usp = [
+    ['Service Time','1-3 Days',['Up to 3 weeks','Up to 3 weeks'],true],
+    ['Repair count','Unlimited',['Up to RRP Device & Up to RRP Protection (for CS)','Up to RRP Device'],true],
+    ['Approval Claim Rate','100%',['< 80%','< 80%'],true],
+    ['Authorized Service Center','Yes (157 ASC)',['Yes','Yes'],true],
+    ['Payment repair fee','Cashless',['Reimbursement','Reimbursement'],true],
+    ['Online Repair Request','Yes',['Yes','No'],true],
+    ['Duration of Use','Monthly, 12, 15, 24, 27 Months',['6 (acc.) 12, 18, 24mo','6, 12, 24mo'],false],
+    ['Delivery Services','Free Delivery & Pick Up',['Free Delivery & Pick Up','Free Delivery & Pick Up'],false],
+    ['Product','ADLD + EW + CS (New) + Monthly',['ADLD, CS & Accessories','ADLD + Theft + Force majeure'],false]
+  ];
+  $('uspGrid').innerHTML = `<div class="tbl-wrap"><table>
+    <thead><tr><th>Qualifications</th><th style="color:#117A52">Samsung Care+</th><th>Competitor Q</th><th>Competitor B</th></tr></thead>
+    <tbody>${usp.map(([q,s,[a,b],win])=>`<tr>
+      <td><b>${q}</b></td>
+      <td><span class="chip ${win?'good':''}" style="margin:0">${s}</span></td>
+      <td><span class="chip warn" style="margin:0;background:${win?'#FDECEC':'#EEF2F7'};color:${win?'#A33':'#5B6B82'}">${a}</span></td>
+      <td><span class="chip warn" style="margin:0;background:${win?'#FDECEC':'#EEF2F7'};color:${win?'#A33':'#5B6B82'}">${b}</span></td>
+    </tr>`).join('')}</tbody></table></div>
+    <div class="small" style="margin-top:8px">Green = Samsung Care+ advantage. Red = competitor weakness. Grey = equal / neutral.</div>`;
+
+  const bandCfg = [
+    {n:'Silver',cls:'tier-silver',sub:'A0x, M0x, A1x, M1x'},
+    {n:'Gold',cls:'tier-gold',sub:'A2x, A3x, A4x, M2x, M3x, M4x · Tab Ax, Ax+, Tab S lite, Tab Activex'},
+    {n:'Platinum',cls:'tier-plat',sub:'A5x, A7x, M5x, M7x, S2xFE · Tab S FE, S FE Plus, Tab Activex Pro'},
+    {n:'Diamond',cls:'tier-dia',sub:'S2x, S2x +, S2x Ultra · Tab S Series'},
+    {n:'Flip',cls:'tier-flip',sub:'Flip'},
+    {n:'Fold',cls:'tier-fold',sub:'Fold'}
+  ];
+  const easy = [
+    {m:'22,900',fee:'100,000',feeOld:'200,000'},{m:'29,900',fee:'200,000'},{m:'41,900',fee:'300,000',feeOld:'375,000'},
+    {m:'79,900',fee:'600,000'},{m:'159,900',fee:'800,000',feeOld:'900,000'},{m:'259,900',fee:'1,000,000',feeOld:'900,000'}
+  ];
+  $('bandsEasy').innerHTML = bandCfg.map((b,i)=>`
+    <div class="band"><div class="hd ${b.cls}"><span>${b.n.toUpperCase()}</span><small>Easy</small></div>
+    <div class="bd"><div class="price">IDR ${easy[i].m}<small> / Month</small></div>
+    <div class="sub">${b.sub}</div>
+    <div class="fee">Biaya Layanan: ${easy[i].feeOld?`<span class="strike">IDR ${easy[i].feeOld}</span>`:''}<b>IDR ${easy[i].fee}</b></div></div></div>`).join('');
+
+  const crack = [
+    ['259,000','159,000','200,000','100,000'],['359,000','199,000','200,000',null],['549,000','299,000','375,000','300,000'],
+    ['749,000','499,000',null,'600,000'],['1,849,000','999,000','900,000','800,000'],['2,749,000','1,599,000','900,000','1,000,000']
+  ];
+  $('bandsCrack').innerHTML = bandCfg.map((b,i)=>{
+    const [p24,p12,feeOld,fee]=crack[i];
+    return `<div class="band"><div class="hd ${b.cls}"><span>${b.n.toUpperCase()}</span><small>Crack Screen</small></div>
+    <div class="bd"><div class="split"><div><span>24 BULAN + EW</span><b>IDR ${p24}</b></div><div><span>12 BULAN</span><b>IDR ${p12}</b></div></div>
+    <div class="fee">Biaya Layanan: ${feeOld?`<span class="strike">IDR ${feeOld}</span>`:''}<b>IDR ${fee||feeOld}</b></div></div></div>`;
+  }).join('');
+
+  const full = [
+    ['489,000','429,000','269,000','219,000','200,000','100,000'],
+    ['729,000','529,000','339,000','299,000',null,'200,000'],
+    ['1,199,000','799,000','559,000','419,000','375,000','300,000'],
+    ['2,099,000','1,299,000','1,199,000','799,000',null,'600,000'],
+    ['3,499,000','2,999,000','1,899,000','1,599,000','900,000','800,000'],
+    ['5,499,000','4,599,000','2,799,000','2,599,000','900,000','1,000,000']
+  ];
+  $('bandsFull').innerHTML = bandCfg.map((b,i)=>{
+    const [o24,n24,o12,n12,fo,fn]=full[i];
+    return `<div class="band"><div class="hd ${b.cls}"><span>${b.n.toUpperCase()}</span><small>Full / ADLD</small></div>
+    <div class="bd"><div class="split">
+      <div><span>24 BULAN + EW</span><span class="strike" style="display:block;margin:2px 0">IDR ${o24}</span><b>IDR ${n24}</b></div>
+      <div><span>12 BULAN</span><span class="strike" style="display:block;margin:2px 0">IDR ${o12}</span><b>IDR ${n12}</b></div></div>
+    <div class="fee">Biaya Layanan: ${fo?`<span class="strike">IDR ${fo}</span>`:''}<b>IDR ${fn}</b> <span class="drop">↓ turun</span></div></div></div>`;
+  }).join('');
+  animateWidths(document.getElementById('product'));
+}
+
+// ---- 03 COMMUNICATION ----
+function renderComm(){
+  // Matrix
+  const weeks = []; for(let i=37;i<=53;i++) weeks.push('W'+i);
+  let html = `<div class="lbl2"></div>` +
+    `<div class="m" style="grid-column:span 4">September · Past</div>` +
+    `<div class="m" style="grid-column:span 4">October · Ongoing</div>` +
+    `<div class="m" style="grid-column:span 4">November · Upcoming</div>` +
+    `<div class="m" style="grid-column:span 5">December · Upcoming</div>` +
+    `<div class="lbl2"></div>` + weeks.map(w=>`<div class="h">${w}</div>`).join('');
+  html += `<div class="lbl2">Key Message</div>
+    <div class="cell" style="grid-column:span 4;background:#E9ECF2;color:#5B6B82">Lebih Aman. Lebih Untung</div>
+    <div class="cell" style="grid-column:span 4;background:#2E7D32">Galaxy Upgrade Festival</div>
+    <div class="cell" style="grid-column:span 4;background:var(--grad2)">Galaxy Upgrade Festival · Upgrade with Care</div>
+    <div class="cell" style="grid-column:span 5;background:var(--grad2)">Galaxy Upgrade Festival · Upgrade with Care</div>
+    <div class="lbl2">CXP Focus</div>
+    <div class="cell" style="grid-column:span 4;background:#D6D9DF;color:#5B6B82">Price Drop</div>
+    <div class="cell" style="grid-column:span 4;background:#2E7D32">Trade-In + SC+ = More Benefits</div>
+    <div class="cell" style="grid-column:span 4;background:var(--grad2)">Policy Transfer</div>
+    <div class="cell" style="grid-column:span 5;background:var(--grad2)">Global Repair</div>
+    <div class="lbl2">Asset</div>
+          <div style="grid-column:span 4"><img src="https://res.cloudinary.com/rolpld3f/image/upload/v1793775562/Screenshot_2026-11-04_135748.png" alt="September asset" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line)"></div>
+          <div style="grid-column:span 4"><img src="https://res.cloudinary.com/rolpld3f/image/upload/v1793775564/Screenshot_2026-11-04_135805.png" alt="October asset" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line)"></div>
+          <div style="grid-column:span 4"><img src="https://res.cloudinary.com/rolpld3f/image/upload/v1793775563/Screenshot_2026-11-04_135813.png" alt="November asset" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line)"></div>
+          <div style="grid-column:span 5"><img src="https://res.cloudinary.com/rolpld3f/image/upload/v1793775562/Screenshot_2026-11-04_135854.png" alt="December asset" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line)"></div>
+          <div class="lbl2">Communication</div>
+          <div style="grid-column:span 4;background:#fff;border-radius:10px;padding:10px;font-size:12px;color:#24344D;box-shadow:inset 0 0 0 1px var(--line)">Upgrade Galaxy · Proteksi Tetap Melindungi. Cicilan Rp79 Ribuan/bulan · Cashback Rp2.5 Jutaan · Jaminan Trade-in s/d Rp14 Juta.</div>
+          <div style="grid-column:span 4;background:#fff;border-radius:10px;padding:10px;font-size:12px;color:#24344D;box-shadow:inset 0 0 0 1px var(--line)">Upgrade Galaxy · Proteksi Tetap Melindungi. Nikmati perlindungan Samsung Care+ dari Galaxy lama ke Galaxy Baru. Cicilan Rp79 Ribuan · Cashback Rp2.5 Jutaan · Jaminan Trade-in.</div>
+          <div style="grid-column:span 4;background:#fff;border-radius:10px;padding:10px;font-size:12px;color:#24344D;box-shadow:inset 0 0 0 1px var(--line)">Galaxy Lebih Aman. Harga Makin Ringan dengan Samsung Care+. Cicilan Rp79 Ribuan/bulan · Cashback Trade-in Rp2.5 Jutaan · Perbaikan 1-3 Hari · Perbaikan Tanpa Batas.</div>
+          <div style="grid-column:span 5;background:#fff;border-radius:10px;padding:10px;font-size:12px;color:#24344D;box-shadow:inset 0 0 0 1px var(--line)">Liburan ke luar negeri. Galaxy tetap terlindungi. Akses Global Repair Samsung Care+ di berbagai negara. Hanya Rp79 Ribu/bulan · Cashback Trade-in Rp2.5 Juta.</div>
+          <div class="lbl2">Channel</div>
+    <div class="cell" style="grid-column:span 17;background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1px var(--line)">Retail POSM · OA · Online Ads</div>`;
+  $('matrixComm').innerHTML = html;
+
+  const alts = [
+    {t:'Alt 1',p:'26 Feb – 17 Mar 2026',d:'Upgrade Galaxy · Proteksi Tetap Melindungi. Cicilan Rp79 Ribuan/bulan · Cashback Rp2.5 Jutaan · Jaminan Trade-in s/d Rp14 Juta.',c:'#E8C9A0'},
+    {t:'Alt 2',p:'26 Feb – 17 Mar 2026',d:'Upgrade Galaxy · Proteksi Tetap Melindungi. Nikmati perlindungan Samsung Care+ dari Galaxy lama ke Galaxy Baru. Cicilan Rp79 Ribuan · Cashback Rp2.5 Jutaan · Jaminan Trade-in.',c:'#A7D8FF'},
+    {t:'Alt 3',p:'1 – 31 Okt 2026',d:'Galaxy Lebih Aman. Harga Makin Ringan dengan Samsung Care+. Cicilan Rp79 Ribuan/bulan · Cashback Trade-in Rp2.5 Jutaan · Perbaikan 1-3 Hari · Perbaikan Tanpa Batas.',c:'#B8BFCC'},
+    {t:'Alt 4',p:'1 – 31 Des 2026',d:'Liburan ke luar negeri. Galaxy tetap terlindungi. Akses Global Repair Samsung Care+ di berbagai negara. Hanya Rp79 Ribu/bulan · Cashback Trade-in Rp2.5 Juta.',c:'#A7D8FF'}
+  ];
+  $('altGrid').innerHTML = alts.map(a=>`
+    <div class="band"><div class="hd" style="background:${a.c};color:var(--navy)"><span>${a.t}</span><small>${a.p}</small></div>
+    <div class="bd"><p class="small" style="font-size:12.5px;color:#24344D">${a.d}</p></div></div>`).join('');
+
+  $('pillarA').innerHTML = [
+    ['Full Protection','Two-year Samsung Care+ Full Protection with savings of up to Rp900,000, subject to applicable terms.'],
+    ['Accidental & Liquid Damage','Protection against covered accidental and liquid damage, according to the selected plan.'],
+    ['Confidence Beyond Purchase','Extend the value of a Galaxy purchase through additional device protection.'],
+    ['Worry Less, Enjoy More','Help consumers feel more confident using and enjoying their new Galaxy.']
+  ].map(([t,d],i)=>`<div><span class="dot2">${i+1}</span><span><b>${t}:</b> ${d}</span></div>`).join('');
+  $('pillarB').innerHTML = [
+    ['Trade-In Value','Trade-in cashback, subject to applicable terms.'],
+    ['Galaxy Upgrade Festival','Promotional benefits that add value to upgrading to a new Galaxy.'],
+    ['Product Choice','Different Galaxy experiences across Galaxy Z Fold8, Galaxy S26 Ultra, and Galaxy S26 FE to suit different consumer needs.'],
+    ['Added Purchase Benefits','Highlight applicable offers that enhance the overall value of upgrading.']
+  ].map(([t,d],i)=>`<div><span class="dot2">${i+1}</span><span><b>${t}:</b> ${d}</span></div>`).join('');
+
+  const tasks = [
+    'Build awareness of Samsung Care+ and its Full Protection proposition.',
+    'Highlight relevant accidental and liquid damage coverage.',
+    'Develop consumer-centric storytelling around protection and peace of mind.',
+    'Integrate Samsung Care+ into Galaxy ownership and upgrade conversations.',
+    'Encourage consumers to consider device protection when purchasing a new Galaxy.',
+    'Highlight trade-in offers and applicable Galaxy Upgrade Festival benefits.',
+    'Communicate relevant promotional incentives as supporting purchase reasons.',
+    'Connect Galaxy product benefits with the added value of Samsung Care+.',
+    'Use timely promotional moments to reinforce upgrade consideration.'
+  ];
+  $('mktTask').innerHTML = `<div class="c6"><div class="flow" style="grid-template-columns:1fr">${tasks.slice(0,5).map((t,i)=>`<div class="node" style="padding:10px 12px;display:flex;gap:10px;align-items:center"><div class="no" style="margin:0;width:24px;height:24px;font-size:11px">${i+1}</div><p style="color:#24344D">${t}</p></div>`).join('')}</div></div>
+    <div class="c6"><div class="flow" style="grid-template-columns:1fr">${tasks.slice(5).map((t,i)=>`<div class="node" style="padding:10px 12px;display:flex;gap:10px;align-items:center"><div class="no" style="margin:0;width:24px;height:24px;font-size:11px">${i+6}</div><p style="color:#24344D">${t}</p></div>`).join('')}</div></div>`;
+
+  $('kpiComm').innerHTML = [
+    ['🎬','126','PR Buzz'],['📰','100','Media Clips'],['🧑‍💼','12','NoK'],['📣','26','NoP'],['📡','11.8M','PO Reach'],['👁️','470K','Views']
+  ].map(([i,v,l])=>`<div class="icon-card"><div class="ic">${i}</div><b>${v}</b><span>${l}</span></div>`).join('');
+  animateWidths(document.getElementById('comm'));
+}
+
+// ---- 04 MARKETING ----
+function renderMarketing(){
+  const months = ['Oktober','November','Desember'];
+  const sc = [21830,19085,26952], rev=[288171,240828,343041];
+  const maxSc = Math.max(...sc), maxRev = Math.max(...rev);
+  $('q4Cols').innerHTML = `<div class="cols" style="height:220px">${sc.map((v,i)=>`
+    <div class="col"><div class="bar" data-h="${(v/maxSc*88).toFixed(1)}" style="height:0"><span>${fmt(v)}</span></div><div class="lb">${months[i]}</div></div>`).join('')}</div>
+    <div class="chip dark" style="font-size:16px;padding:9px 18px;margin-top:12px">Total SC+ 67.868</div>`;
+  $('q4Rev').innerHTML = `<div class="cols" style="height:220px">${rev.map((v,i)=>`
+    <div class="col"><div class="bar alt" data-h="${(v/maxRev*88).toFixed(1)}" style="height:0"><span>$${fmt(v)}</span></div><div class="lb">${months[i]}</div></div>`).join('')}</div>
+    <div class="chip dark" style="font-size:16px;padding:9px 18px;margin-top:12px">Total Rev $872.040</div>`;
+
+  $('mixDonut').innerHTML = `<div class="donut-row" style="flex-wrap:nowrap;align-items:center;gap:14px">${donut([{pct:55,color:'#1F5BFF'},{pct:35,color:'#A7D8FF'},{pct:5,color:'#0B1F3A'},{pct:5,color:'#E08A00'}],130,'100%','segment')}
+    <div class="dleg"><div><span><i class="dot" style="background:#1F5BFF"></i>Galaxy Z · Primary</span><b>55%</b></div>
+    <div><span><i class="dot" style="background:#A7D8FF"></i>Galaxy S · Secondary</span><b>35%</b></div>
+    <div><span><i class="dot" style="background:#0B1F3A"></i>Galaxy A</span><b>5%</b></div>
+    <div><span><i class="dot" style="background:#E08A00"></i>Galaxy Tab &amp; Watch</span><b>5%</b></div></div></div>`;
+
+  const seg = [['Galaxy A',2.1],['Galaxy S',7.4],['Galaxy Z',3.7],['Galaxy Tab',4.4],['Galaxy Watch',8.5]];
+  $('arSeg').innerHTML = `<div class="bars">${seg.map(([n,v])=>barRow(n,v,10,v+'%')).join('')}
+    ${barRow('TOTAL',2.8,10,'2.8%','linear-gradient(90deg,#0B1F3A,#1428A0)')}</div>
+    <div class="small" style="margin-top:8px">Attachment rate Aug ‘26. Maximum scale 10% so the segment comparison is visible.</div>`;
+
+  const pillars = [
+    ['Awareness','Make the product relevant and desirable.'],
+    ['Engagement','Turn awareness into consideration.'],
+    ['Store traffic','Move digital interest into physical experience.'],
+    ['User experience','Prove product value through hands-on experience.'],
+    ['Happy users','Maximize satisfaction, confidence and continued usage.'],
+    ['Advocacy','Turn satisfaction into recommendation and positive sentiment.'],
+    ['Conversion','Convert purchase intent into actual sales.']
+  ];
+  $('pillars7').innerHTML = `<div class="flow" style="grid-template-columns:repeat(7,minmax(0,1fr))">${pillars.map(([t,d],i)=>`
+    <div class="node"><div class="no">${i+1}</div><h4>${t}</h4><p>${d}</p></div>`).join('')}</div>`;
+
+  $('postsBars').innerHTML = `
+    <div class="c6" style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px"><div class="label" style="margin-bottom:8px">Product Engagement · 114 Posts</div>
+      <div class="bars">
+        ${barRow('PR Media',100,134,'100 Posts','linear-gradient(90deg,#1428A0,#1F5BFF)')}
+        ${barRow('Tech Reviewers',10,134,'10 Posts','linear-gradient(90deg,#1428A0,#1F5BFF)')}
+        ${barRow('Influencers',4,134,'4 Posts','linear-gradient(90deg,#1428A0,#1F5BFF)')}
+      </div></div>
+    <div class="c6" style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px"><div class="label" style="margin-bottom:8px">Store Traffic · 44 Posts</div>
+      <div class="bars">
+        ${barRow('Retail Visibilities',818,818,'818 stores','linear-gradient(90deg,#4B1A7A,#7A2FA8)')}
+        ${barRow('Social Edu Content',20,20,'20 Posts','linear-gradient(90deg,#4B1A7A,#7A2FA8)')}
+        ${barRow('Tech Reviewers',16,20,'16 Posts','linear-gradient(90deg,#4B1A7A,#7A2FA8)')}
+        ${barRow('Influencers',8,20,'8 Posts','linear-gradient(90deg,#4B1A7A,#7A2FA8)')}
+      </div></div>
+    <div class="c12"><div class="small">TOTAL 158 posts · Influencers 12 · Social Edu Content 20 · Tech Reviewers 26 · PR Media 100</div></div>`;
+  animateWidths(document.getElementById('mktplan'));
+}
+
+// ---- 05 DIGITAL ----
+function renderDigital(){
+  const cxp = [['Trade-in + SC+','💰'],['Full Protection / ADLD','🛡️'],['Transfer Policy','🔁'],['Global Repair','🌍'],['Testimony','💬']];
+  $('cxpIcons').innerHTML = cxp.map(([t,i])=>`<div class="icon-card"><div class="ic">${i}</div><b>${t}</b></div>`).join('');
+
+  $('tgtNew').innerHTML = ['Why protection matters from the start','What Samsung Care+ covers','Which protection option fits their needs','Make the value feel worth considering before an incident happens']
+    .map((t,i)=>`<div><span class="dot2">${i+1}</span>${t}</div>`).join('');
+  $('tgtCur').innerHTML = ['Show the value of protection through real-life problems','Make repair cost and protection benefits more tangible','Encourage them to consider Care+ before they actually need it']
+    .map((t,i)=>`<div><span class="dot2">${i+1}</span>${t}</div>`).join('');
+
+  $('funnelOwn').innerHTML = [
+    ['AWARENESS','Create the reason to care','IG Reels + TikTok','#1428A0'],
+    ['EDUCATION','Show why Care+ is worth having','IG Carousel','#1F5BFF'],
+    ['CONSIDERATION','Make the value tangible','IG Reels','#4C84FF'],
+    ['CONVERSION','Make the decision easier','IG Story + Reels + TikTok','#0B1F3A']
+  ].map(([t,d,c,col],i)=>`<div class="node" style="background:${col};color:#fff;margin:0 0 6px;border:none;margin-left:${i*12}px;margin-right:${(3-i)*12}px">
+    <h4 style="color:#fff">${t}</h4><p style="color:rgba(255,255,255,.9)">${d}</p><p style="color:rgba(255,255,255,.75);font-size:11px;margin-top:4px">${c}</p></div>`).join('');
+
+  $('clippers').innerHTML = [['IG Reels','Build consideration through relatable, value-led content.'],['TikTok','Drive reach through raw, relatable conversations.'],['YouTube Shorts','Extend reach through bite-sized product stories.']]
+    .map(([t,d])=>`<div><span class="dot2">▶</span><span><b>${t}:</b> ${d}</span></div>`).join('');
+  $('kolTypes').innerHTML = [['Tech / Gadget KOL','Build credibility through product education.'],['Lifestyle KOL','Make protection relevant to everyday use.'],['Experience-led KOL','Bring the value of protection to life through real experiences.']]
+    .map(([t,d])=>`<div><span class="dot2">★</span><span><b>${t}:</b> ${d}</span></div>`).join('');
+
+  $('oaChev').innerHTML = [
+    ['OKT · Care Starts Here','Awareness · Creates the reason to care','#1428A0'],
+    ['NOV · Know Your Care','Education · Makes the value tangible','#1F5BFF'],
+    ['NOV · Less Drama, More Value','Consideration','#4C84FF'],
+    ['DES · Ready to Care?','Conversion · Makes the decision easier','#0B1F3A']
+  ].map(([t,d,c])=>`<div style="background:${c}"><h4>${t}</h4><p>${d}</p></div>`).join('');
+
+  const oaItems = [
+    ['Care Starts Here','Kenapa harus pakai Samsung Care+ sejak day 1 punya Galaxy?','Hypothetical hook about the worst-case scenario'],
+    ['Know Your Care','Crack Screen 101 · The search vs The Solution','Carousel: “the search vs. the solution” when people crack their screens'],
+    ['Less Drama, More Value','Pakai Samsung Care+ VS Gak Pakai Samsung Care+','Split-screen POV, with vs without Care+'],
+    ['Ready to Care?','Q&A beli Samsung Care+','Netizen questions via IG Stories → FAQ video']
+  ];
+  const oaImgs = [
+    'https://res.cloudinary.com/rolpld3f/image/upload/v1793182306/Screenshot_2026-10-28_170809.png',
+    'https://res.cloudinary.com/rolpld3f/image/upload/v1793182306/Screenshot_2026-10-28_170816.png',
+    'https://res.cloudinary.com/rolpld3f/image/upload/v1793182306/Screenshot_2026-10-28_170823.png',
+    'https://res.cloudinary.com/rolpld3f/image/upload/v1793182306/Screenshot_2026-10-28_170838.png'
+  ];
+  $('oaItems').innerHTML = oaItems.map(([p,c,d],i)=>`<div class="c3 node" style="margin:0"><div class="label" style="color:var(--electric)">${p}</div><h4 style="margin-top:6px">${c}</h4><p>${d}</p><img src="${oaImgs[i]}" alt="${p}" loading="lazy" style="width:100%;border-radius:12px;margin-top:10px;border:1px solid var(--line)"></div>`).join('');
+
+  $('usp3').innerHTML = [['🛡️','Coverage','ADLD, Crack Screen'],['⏳','Duration of Use','1 YR, 2 YR, +3 months in SES, monthly in eStore'],['🪟','Window Purchase','60 days']]
+    .map(([i,t,d])=>`<div class="icon-card"><div class="ic">${i}</div><b>${t}</b><span>${d}</span></div>`).join('');
+  $('oaTimeline').innerHTML = [['October','Creates the reason to care'],['November','Makes the value tangible'],['December','Makes the decision easier']]
+    .map(([m,d])=>`<div class="icon-card"><b style="color:var(--electric)">${m}</b><span>${d}</span></div>`).join('');
+
+  const roles = [
+    ['Crack Screen','Hero / strongest newness','Nunggu layar retak dulu baru mikirin perlindungan?','Jangan tunggu kejadian. Lindungi Galaxy kamu dari awal pakai Samsung Care+.','Beli perlindungannya sebelum butuh.','Dulu mikir, "Ah, HP gue aman-aman aja." Sampai akhirnya...'],
+  ];
+  $('clipperMatrix').innerHTML = `<div class="tbl-wrap"><table>
+    <thead><tr><th style="width:130px"></th>
+      <th style="background:#1428A0;color:#fff">Crack Screen</th>
+      <th style="background:#1F5BFF;color:#fff">1 YR, 2 YR, +3 months in SES, monthly in eStore</th>
+      <th style="background:#4C84FF;color:#fff">Price value</th>
+      <th style="background:#0B1F3A;color:#fff">Testimonial</th></tr></thead>
+    <tbody>
+      <tr><td><b>Role</b></td><td><span class="chip">Hero / strongest newness</span></td><td><span class="chip">Build broader protection value</span></td><td><span class="chip">Address affordability / worth-it tension</span></td><td><span class="chip">Real user proof</span></td></tr>
+      <tr><td><b>Hook</b></td><td>Nunggu layar retak dulu baru mikirin perlindungan?</td><td>Galaxy kamu dipakai tiap hari. Perlindungannya jangan dilupain.</td><td>Mending servis ngabisin jutaan atau bayar proteksi sebulan mulai Rp70ribuan?</td><td>Dulu mikir, "Ah, HP gue aman-aman aja." Sampai akhirnya...</td></tr>
+      <tr><td><b>CXP</b></td><td>Jangan tunggu kejadian. Lindungi Galaxy kamu dari awal pakai Samsung Care+.</td><td>Dari awal beli, pilih durasi Samsung Care+ sesuai kebutuhan. Ada pilihan 1 tahun, 2 tahun, dan opsi perpanjangan yang tersedia.</td><td>Pakai Samsung Care+ mulai Rp70ribuan kamu bisa dapat perlindungan kerusakan nggak sengaja, kerusakan akibat cairan, dan kerusakan layar. Jadi, lebih worth it buat siapin perlindungan dari awal.</td><td>Pengalaman mereka ngingetin kita pentingnya nyiapin perlindungan Samsung Care+ sebelum kejadian.</td></tr>
+      <tr><td><b>CTA / Benefit</b></td><td><b>Beli perlindungannya sebelum butuh.</b></td><td><b>Lindungi lebih lama, mulai dari awal.</b></td><td><b>Lindungi Galaxy kamu dari awal. Biar nggak boncos kalau ada kejadian.</b></td><td><b>Jangan tunggu pengalaman yang sama. Lindungi Galaxy kamu dari awal.</b></td></tr>
+    </tbody></table></div>`;
+
+  // content gantt by week (W41..W53)
+  const items = [
+    ['1 · AON: Kenapa harus pakai Samsung Care+ sejak day 1?','Video · IG Reels, TikTok',43],
+    ['2 · AON: Crack Screen 101','Graphic static · IG Feed Carousel',46],
+    ['3 · AON: Pakai Samsung Care+ VS Gak Pakai','Video · IG Reels',49],
+    ['4 · AON: Q&A beli Samsung Care+','Graphic static · IG Story',50],
+    ['5 · AON: Q&A respons beli Samsung Care+','Video · IG Reels, TikTok',51],
+    ['6 · Activity #NoPanikNoDrama','Graphic static · X, IG Feed',43],
+    ['7 · Activity #ByeDramaRetak','Graphic static · X',47],
+    ['8 · Activity #AmanOnDramaGone','Graphic static · X',51]
+  ];
+  const wkCols = 13; // W41..W53
+  let g = `<div class="wk" style="grid-template-columns:260px repeat(13,1fr)"><div class="h"></div>${[...Array(wkCols)].map((_,i)=>`<div class="h">W${41+i}</div>`).join('')}</div>`;
+  items.forEach(([t,s,w])=>{
+    const col = w-40; // 1-indexed col in W41..W53
+    g += `<div class="row" style="grid-template-columns:260px repeat(${wkCols},1fr)">
+      <div class="lbl2">${t}<div class="small">${s}</div></div>
+      ${[...Array(wkCols)].map((_,i)=> i+1===col ? `<div style="height:22px;border-radius:8px;background:var(--grad2);box-shadow:0 6px 12px -8px rgba(11,31,58,.6)"></div>` : `<div></div>`).join('')}
+    </div>`;
+  });
+  g += `<div class="row" style="grid-template-columns:260px repeat(${wkCols},1fr)"><div class="lbl2">9–11 · KV AH (TBC)<div class="small">Graphic static · IG Feed</div></div>${[...Array(wkCols)].map(()=>'<div></div>').join('')}</div>`;
+  $('contentGantt').innerHTML = g;
+  animateWidths(document.getElementById('digital'));
+}
+
+// ---- 06 INFLUENCERS ----
+function renderInfluencers(){
+  $('infraCxp').innerHTML = [['🛡️','Coverage','ADLD, Crack Screen'],['⏳','Duration of Use','1 YR, 2 YR, +3 months in SES, monthly in eStore'],['🪟','Window Purchase','60 days']]
+    .map(([i,t,d])=>`<div class="icon-card" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3)"><div class="ic">${i}</div><b style="color:#fff">${t}</b><span style="color:rgba(255,255,255,.85)">${d}</span></div>`).join('');
+
+  $('pillar1Stats').innerHTML = [['4','KOL'],['2.0%','IER'],['920,000','PO Reach']].map(([v,l])=>`<div class="icon-card"><b style="font-size:20px;color:var(--cobalt)">${v}</b><span>${l}</span></div>`).join('');
+  $('pillar2Stats').innerHTML = [['8','KOL'],['2.0%','IER'],['1,000,000','PO Reach']].map(([v,l])=>`<div class="icon-card"><b style="font-size:20px;color:var(--cobalt)">${v}</b><span>${l}</span></div>`).join('');
+  $('infTotals').innerHTML = [['12','NoK'],['12','NoP'],['1,920,000','Potential Reach'],['2%','IER'],['8','Owning Content']]
+    .map(([v,l])=>`<div class="icon-card"><b style="font-size:20px;color:var(--navy)">${v}</b><span>${l}</span></div>`).join('');
+
+  const personas = [
+    {ico:'💸',name:'The “Smart Money / Smart Living” Creator',q:'“Smart ownership means enjoying a premium flagship without worrying about hidden repair costs.”',d:'Smart spending, gadget investment, & young lifestyle lifehack creators. Wants to protect flagship asset value and eliminate unexpected repair fees.',usp:[['Trade-In Protection','Maximize trade-in cashback (up to Rp 2.5 Mio).'],['Full Protection / ADLD','Accidental & liquid coverage with 100% claim rate.'],['Transfer Policy','Transfer remaining Samsung Care+ plan to new Galaxy.'],['Global Repair','Official international repair access while traveling.']],
+      kol:[['FR','Friderica',176,2.1],['KH','Khansa',327,2.4],['CP','Cipop',28,2.7]]},
+    {ico:'💼',name:'The “Productivity & Mobile Executive” Creator',q:'“My Galaxy is my primary business tool, if an accident happens, zero downtime is non-negotiable.”',d:'Young professionals, entrepreneurs, & mobile executives relying 100% on S/Z Series. Cannot afford 3-week repair delays or business disruption.',usp:[['Global Repair','Official repair support during overseas business trips.'],['Transfer Policy','Seamlessly transfer coverage when upgrading work phones.'],['Trade-In Protection','Preserves device condition for smooth annual upgrades.'],['Full Protection / ADLD','Fast 1–3 day cashless repair with zero downtime.']],
+      kol:[['AM','Abi Morris',647,2.3],['JO','Joshua',709,1.9],['RF','Reza Febs',75,2.9]]},
+    {ico:'🎒',name:'The “Authentic Lifestyle” Creator',q:'“I want total freedom to create content at concerts, shoots, & travels without fear of accidental drops.”',d:'Travel, fashion, & concert vloggers capturing real-life moments on S/Z Series. High daily device handling in active environments.',usp:[['Full Protection / ADLD','Shoot content worry-free from drops & water spills.'],['Global Repair','Access official Samsung service anywhere overseas.'],['Trade-In Protection','Retains high device value for easy annual upgrades.'],['Transfer Policy','Easily transfer remaining coverage when switching devices.']],
+      kol:[['CL','Clara Lianis',133,2.9],['GD','Gabriela Desta',259,2.2]]}
+  ];
+  const maxReach = 709;
+  $('personaGrid').innerHTML = personas.map(p=>`
+    <div class="c4 persona"><div class="ico">${p.ico}</div><h4>${p.name}</h4>
+      <div class="q">${p.q}</div>
+      <p class="small" style="margin-bottom:10px;font-size:12.5px">${p.d}</p>
+      <div class="usp">${p.usp.map(([t,d])=>`<div><span class="dot2">✓</span><span><b>${t}:</b> ${d}</span></div>`).join('')}</div>
+      <div class="label" style="margin:12px 0 6px">KOL Suggestion</div>
+      <div class="kol-grid" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px">
+        ${p.kol.map(([ini,n,reach,er])=>`<div class="kol" style="padding:10px">${kolAv(n,ini,44)}<b style="font-size:12px">${n}</b>
+          <div class="bar"><i data-w="${(reach/maxReach*100).toFixed(1)}"></i></div>
+          <div class="m">PO ${reach}K</div><div class="er">ER ${er}%</div></div>`).join('')}
+      </div></div>`).join('');
+
+  const pillars = [
+    {t:'Pillar 1 · Care Starts Here (Awareness)',m:'Proves why adding Samsung Care+ on Day 1 is a smart choice to protect your new Galaxy.',usp:['Full ADLD Protection: Complete accidental & liquid damage coverage.','Price Drop Savings: Save up to Rp 900k on full protection.','100% Claim Approval Rate: Guaranteed official repair at 157+ Samsung ASCs.'],s:['New User POV: “Kenapa Harus Pakai Samsung Care+ Sejak Day 1 Punya Galaxy?” Video unboxing yang memperlihatkan alasan kenapa beli Care+ dari awal jauh lebih hemat.','Current User POV: “Berapa Biaya Servis Asli HP Belasan Juta Tanpa Care+?” Perbandingan biaya perbaikan mahal tanpa Care+ vs gratis/cashless dengan Care+.'],c:'#1428A0'},
+    {t:'Pillar 2 · Know Your Care (Education)',m:'Educates on screen crack coverage and how Care+ solves repair hassles.',usp:['Dedicated Crack Screen Protection: Save up to Rp 900k on screen repairs.','Cashless Official ASC Service: Zero out-of-pocket reimbursement hassle.','1–3 Days Fast Turnaround: Minimal downtime for daily vlogging & work.'],s:['New User POV: “Crack Screen 101: The Search vs The Solution” Edukasi kenapa proteksi layar wajib dipilih saat beli HP baru agar tidak pusing di kemudian hari.','Current User POV: “Layar Retak Pas Shoot OOTD / Gym?” Cerita nyata perbaikan layar retak di servis resmi Samsung yang cepat dan tanpa bayar tunai.'],c:'#1F5BFF'},
+    {t:'Pillar 3 · Less Drama, More Value (Consideration)',m:'Shows the real value of Care+ through side-by-side “With Care+ vs Without Care+” comparisons.',usp:['Accidental & Liquid Damage (ADLD): Full protection during events & travels.','Free Pick-up & Delivery Service: Nationwide repair service convenience.','Official Component Care: Preserves pristine device condition & camera clarity.'],s:['New User POV: “Beli HP Lipat 20 Juta: Pakai Care+ VS Gak Pakai Care+” Perbandingan rasa tenang vs rasa was-was.','Current User POV: “Moments Before Disaster: Untung Pake Samsung Care+” Vlog momen HP jatuh dan kemudahan servis resmi.'],c:'#4C84FF'},
+    {t:'Pillar 4 · Ready to Care? (Conversion)',m:'Drives easy purchase through Q&As, monthly sub guides, and SGI App tutorials.',usp:['Easy Monthly Subscription: Flexible plan starting from Rp 22.9k/mo on eStore.','60-Day Purchase Window: Second-chance activation via Samsung Gift Indonesia (SGI) App.','Promoter Referral Code: Easy activation post-store visit.'],s:['New User POV: “Q&A Beli Care+: Proteksi Premium Cuma Rp 75k/Bulan di eStore?” Video Q&A dan cara langganan bulanan di eStore.','Current User POV: “Baru Beli Galaxy Tapi Lupa Beli Care+?” Panduan mengaktifkan Care+ di SGI dalam 60 hari.'],c:'#0B1F3A'}
+  ];
+  $('pillarContent').innerHTML = pillars.map((p,i)=>`
+    <div class="c6 persona" style="height:auto"><div class="ico" style="background:${p.c};color:#fff;font-weight:700">${i+1}</div><h4>${p.t}</h4>
+      <div class="small" style="font-size:13px;color:#24344D;margin-bottom:10px">${p.m}</div>
+      <div class="label" style="margin-bottom:6px">USP Link</div>
+      <div class="usp">${p.usp.map(u=>`<div><span class="dot2">✓</span><span>${u}</span></div>`).join('')}</div>
+      <div class="label" style="margin:12px 0 6px">Sample Content</div>
+      <div class="usp">${p.s.map(u=>`<div><span class="dot2" style="background:var(--navy)">▶</span><span>${u}</span></div>`).join('')}</div>
+    </div>`).join('');
+
+  $('infRollout').innerHTML = `<div class="chev">
+    <div style="background:#1428A0"><h4>Oktober · Care Starts Here</h4><p>NoK 7 | NoP 7</p></div>
+    <div style="background:#1F5BFF"><h4>November · Education</h4><p>NoK 7 | NoP 7</p></div>
+    <div style="background:#0B1F3A"><h4>Desember · Education</h4><p>NoK 4 | NoP 4</p></div></div>
+    <div class="grid" style="margin-top:12px">
+      <div class="c4 box"><div class="label">Oktober · KOL</div><div class="icon-row" style="margin-top:6px">${['Khansa','Cipop','Gabriela Desta'].map(n=>`<span style="display:inline-flex;align-items:center;gap:6px;margin:4px 12px 4px 0">${logo(n,34)}<b style="font-size:12px;color:var(--navy)">${n}</b></span>`).join('')}</div></div>
+      <div class="c4 box"><div class="label">November · KOL</div><div class="icon-row" style="margin-top:6px">${['Joshua','Reza Febs','Abi Morris'].map(n=>`<span style="display:inline-flex;align-items:center;gap:6px;margin:4px 12px 4px 0">${logo(n,34)}<b style="font-size:12px;color:var(--navy)">${n}</b></span>`).join('')}</div></div>
+      <div class="c4 box"><div class="label">Desember · KOL</div><div class="icon-row" style="margin-top:6px">${['Clara Lianis','Tessy Valensia'].map(n=>`<span style="display:inline-flex;align-items:center;gap:6px;margin:4px 12px 4px 0">${logo(n,34)}<b style="font-size:12px;color:var(--navy)">${n}</b></span>`).join('')}</div></div>
+    </div>
+    <div class="icon-row" style="margin-top:12px"><div class="icon-card"><b>Buzz 2.993</b><span>Oktober</span></div><div class="icon-card"><b>Buzz 3.989</b><span>November</span></div><div class="icon-card"><b>Buzz 1.595</b><span>Desember</span></div></div>
+    `;
+  animateWidths(document.getElementById('influencers'));
+}
+
+// ---- 07 PR ----
+function renderReviewerWeeks(){
+  const weeks = [
+    {w:'W45',r:'2–8 Nov'},{w:'W46',r:'9–15 Nov'},{w:'W47',r:'16–22 Nov'},
+    {w:'W48',r:'23–29 Nov'},{w:'W49',r:'30 Nov–6 Des'},{w:'W50',r:'7–13 Des'}
+  ];
+  const items = [
+    {n:'GadgetApa',d:'5 Nov',dev:'Galaxy Fold8 – Store',w:0},
+    {n:'Bestindotech',d:'10 Nov',dev:'Galaxy Fold8 – non Store',w:1},
+    {n:'Bertustus',d:'12 Nov',dev:'Galaxy Fold8 – non Store',w:1},
+    {n:'Dhiarcom',d:'14 Nov',dev:'Galaxy Fold8 – Store',w:1},
+    {n:'Adimology',d:'17 Nov',dev:'Galaxy S26 FE – Store',w:2},
+    {n:'Sobat Hape',d:'19 Nov',dev:'Galaxy Fold8 – Store',w:2},
+    {n:'DKID Media',d:'23 Nov',dev:'Galaxy S26 Ultra – non Store',w:3},
+    {n:'Sadapin Tekno',d:'26 Nov',dev:'Galaxy S26 Ultra – Store',w:3},
+    {n:'WasaWirman',d:'28 Nov',dev:'Galaxy Fold8 – Store',w:3},
+    {n:'Taufik Nobo',d:'30 Nov',dev:'Galaxy Fold8 – non Store',w:4},
+    {n:'Bangjoereview',d:'4 Des',dev:'Galaxy S26 FE – non Store',w:4},
+    {n:'GadgetFren',d:'9 Des',dev:'Galaxy Fold8 – non Store',w:5}
+  ];
+  $('reviewerWeeks').innerHTML = `<div class="scroll"><div style="min-width:900px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px">
+    ${weeks.map(x=>`<div style="background:var(--grad);color:#fff;border-radius:12px;padding:10px;text-align:center"><div style="font-weight:800;font-size:15px">${x.w}</div><div style="font-size:11.5px;opacity:.9">${x.r}</div></div>`).join('')}
+    ${weeks.map((x,i)=>`<div style="display:flex;flex-direction:column;gap:8px;background:rgba(11,31,58,.03);border-radius:12px;padding:8px;min-height:140px">
+      ${items.filter(it=>it.w===i).map(it=>`<div style="background:#fff;border:1px solid var(--line);border-left:4px solid #1F5BFF;border-radius:10px;padding:8px 10px;box-shadow:0 6px 14px -10px rgba(11,31,58,.4)">
+        <div style="font-size:11px;font-weight:800;color:var(--electric)">📅 ${it.d}</div>
+        <div style="font-weight:700;color:var(--navy);font-size:13px">${it.n}</div>
+        <div class="small">${it.dev}</div></div>`).join('') || '<div class="small" style="text-align:center;padding:8px 0">—</div>'}
+    </div>`).join('')}
+  </div></div>`;
+}
+function renderReviewerGrid(){
+  const maxR = 5.4;
+  const rv = [
+    ['DHIARCOM','5.4M',5.4,'150K',2],['DKID Media','1.8M',1.8,'91K',2],['Sobat Hape','1.4M',1.4,'71K',2],
+    ['Bestindotech','1.1M',1.1,'55K',2],['WasaWirman','534K',0.534,'26K',2],['Sadapin Tekno','511K',0.511,'25K',2],
+    ['Gadgetfren','222K',0.222,'11K',3],['Taufik Nobo','182K',0.182,'9.1K',3],['Bertustustus','336K',0.336,'16K',1],
+    ['gadgetApa','154K',0.154,'7.7K',1],['Bangjoereview','106K',0.106,'5.3K',3],['Adimology','66K',0.066,'3.3K',3]
+  ];
+  $('reviewerGrid').innerHTML = `<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px">
+    ${rv.map(([n,r,rn,v,p])=>`<div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 14px;text-align:center;box-shadow:var(--shadow)">
+      <div style="display:flex;justify-content:center">${logo(n,84)}</div>
+      <div style="font-weight:800;color:var(--navy);margin:12px 0 6px;font-size:15px">${n}</div>
+      <div class="track2" style="height:8px"><div class="fill" data-w="${(rn/maxR*100).toFixed(1)}"></div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px">
+        <div style="background:var(--ice-soft);border-radius:10px;padding:6px 4px"><div class="small">PO Reach</div><div style="font-weight:800;color:var(--navy)">${r}</div></div>
+        <div style="background:var(--ice-soft);border-radius:10px;padding:6px 4px"><div class="small">Views</div><div style="font-weight:800;color:var(--navy)">${v}</div></div>
+        <div style="background:var(--ice-soft);border-radius:10px;padding:6px 4px"><div class="small">NoP</div><div style="font-weight:800;color:var(--navy)">${p}</div></div>
+      </div></div>`).join('')}
+  </div>`;
+}
+function renderPR(){ renderReviewerWeeks(); renderReviewerGrid();
+  $('outlets').innerHTML = `<div class="icon-row">${['Jawa Pos','Kompas Tekno','Jpnn','Antaranews'].map(n=>`<div class="icon-card" style="min-width:110px">${logo(n,40)}<b>${n}</b></div>`).join('')}</div>`;
+
+  $('prGantt').innerHTML = `
+    <div class="wk" style="grid-template-columns:200px repeat(4,1fr)"><div class="h"></div>${['W47','W48','W49','W50'].map(w=>`<div class="h">${w}</div>`).join('')}</div>
+    ${[
+      ['PR Story',1,1,'#1428A0'],
+      ['Editor Pitch',1,2,'#1F5BFF'],
+      ['Tech Reviewer Collab',1,4,'#0B1F3A']
+    ].map(([n,s,e,c])=>`<div class="row" style="grid-template-columns:200px repeat(4,1fr)"><div class="lbl2">${n}</div>
+      ${[1,2,3,4].map(i=> i>=s&&i<=e ? `<div class="bar" style="background:${c};grid-column:${i}"></div>`:`<div></div>`).join('')}</div>`).join('')}`;
+
+  $('prStory').innerHTML = [
+    'Samsung Care+ provides added reassurance beyond the initial purchase.',
+    'Two-Year Full Protection helps consumers enjoy their Galaxy with greater confidence.',
+    'Accidental and liquid damage protection, subject to plan coverage.',
+    'Galaxy Z Fold8, Galaxy S26 Ultra, and Galaxy S26 FE offer experiences for different consumer needs.',
+    'Galaxy Upgrade Festival and trade-in offers add value to the upgrade journey.'
+  ].map(t=>`<div><span class="dot2">✓</span><span>${t}</span></div>`).join('');
+
+  const pp = (arr)=>arr.map(t=>`<div><span class="dot2">✓</span><span>${t}</span></div>`).join('');
+  $('ppZ8').innerHTML = pp(['Samsung Care+: Two-Year Full Protection, with savings of up to Rp900K.','Accidental and liquid damage protection, subject to plan coverage.',"Fold8's passport-size design, large display, and AI productivity features.",'Added peace of mind when investing in a premium foldable.']);
+  $('uiZ8').innerHTML = pp(['How Samsung Care+ adds value beyond purchase.','Full Protection benefits and applicable coverage.','Galaxy Upgrade Festival as a supporting upgrade benefit.']);
+  $('ppUltra').innerHTML = pp(['Samsung Care+: Two-Year Full Protection, with savings of up to Rp900K.','Accidental and liquid damage protection, subject to plan coverage.','200MP camera, Nightography, Snapdragon 8 Elite Gen 5 for Galaxy, and Galaxy AI.','Added protection when investing in a premium Galaxy.']);
+  $('uiUltra').innerHTML = pp(['How Samsung Care+ enhances peace of mind.','Key protection benefits and coverage.','Trade-in and Galaxy Upgrade Festival offers as supporting upgrade incentives.']);
+  $('ppFE').innerHTML = pp(['Samsung Care+: Two-Year Full Protection, with savings of up to Rp900K.','Accidental and liquid damage protection, subject to plan coverage.','Galaxy AI, Agentic AI, My FanCam, and Horizontal Lock.','Camera capabilities and seven years of OS and security updates.','Added protection for everyday Galaxy use.']);
+  $('uiFE').innerHTML = pp(['How Samsung Care+ enhances Galaxy ownership.','Full Protection benefits and applicable coverage.','Galaxy Upgrade Festival trade-in and promotional offers as supporting upgrade incentives.']);
+
+  const rv = [
+    ['DHIARCOM',5.4,150,2],['DKID Media',1.8,91,2],['Sobat Hape',1.4,71,2],['Bestindotech',1.1,55,2],['WasaWirman',0.534,26,2],['Sadapin Tekno',0.511,25,2],
+    ['Gadgetfren',0.222,11,3],['Taufik Nobo',0.182,9.1,3],['Bertustustus',0.336,16,1],['gadgetApa',0.154,7.7,1],['Bangjoereview',0.106,5.3,3],['Adimology',0.066,3.3,3]
+  ];
+  const maxRv = 5.4;
+  $('reviewerBars').innerHTML = `<div class="bars">${rv.map(([n,r,v,p])=>`
+    <div class="brow" style="grid-template-columns:190px 1fr 150px"><span class="nm" style="display:flex;align-items:center;gap:8px">${logo(n)}${n}</span>
+      <div class="track2"><div class="fill" data-w="${(r/maxRv*100).toFixed(2)}"></div></div>
+      <span class="v" style="font-size:12px">${r>=1?r+'M':Math.round(r*1000)+'K'} · ${v}K views · ${p} NoP</span></div>`).join('')}</div>`;
+
+  const grp = [
+    {w:'Week 45–46',items:[['GadgetApa','5 Nov','Galaxy Fold8 – Store'],['Bestindotech','10 Nov','Galaxy Fold8 – non Store'],['Bertustus','12 Nov','Galaxy Fold8 – non Store']]},
+    {w:'Week 46–47',items:[['Dhiarcom','14 Nov','Galaxy Fold8 – Store'],['Adimology','17 Nov','Galaxy S26 FE – Store'],['Sobat Hape','19 Nov','Galaxy Fold8 – Store'],['DKID Media','23 Nov','Galaxy S26 Ultra – non Store']]},
+    {w:'Week 48–49',items:[['Sadapin Tekno','26 Nov','Galaxy S26 Ultra – Store'],['WasaWirman','28 Nov','Galaxy Fold8 – Store'],['Taufik Nobo','30 Nov','Galaxy Fold8 – non Store']]},
+    {w:'Week 49–50',items:[['Bangjoereview','4 Des','Galaxy S26 FE – non Store'],['GadgetFren','9 Des','Galaxy Fold8 – non Store']]}
+  ];
+  $('reviewerTl').innerHTML = `<div class="wk" style="grid-template-columns:repeat(4,1fr)">${grp.map(g=>`<div class="h" style="text-align:left;font-size:12px;color:var(--navy)">${g.w}</div>`).join('')}</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">${grp.map(g=>`
+      <div class="tl">${g.items.map(([n,d,dev])=>`<div class="it"><div class="d">${d}</div><p><b>${n}</b> · ${dev}</p></div>`).join('')}</div></div>`).join('')}</div>`;
+
+  const steps = [
+    ['Hook Content','Creators will develop the content hook in their own style, focusing on the program Trade-in : Upgrade With Care.','“Beli hape flagship samsung Mahal? bentar-bentar…”'],
+    ['Share SC+ benefits & New Price','Samsung Care+ is now more affordable, with a stronger focus on the ADLD Program, plus Crack Screen Only and Monthly Subscription.','“Oke setelah dijelasin, cukup menarik sih…”'],
+    ['Real Use Case Scenario','Pique curiosity about the need for true peace of mind, supported by practical scenarios and tangible benefits.','“Nah, bener kan? kalo kita belinya combine dengan trade in…”'],
+    ['Trade in Affordability','Clearly illustrate the trade-in program and the maximum value customers can get + inform the Galaxy Care+ Program.','“sekarang gue lagi di samsung experience store…”'],
+    ['How to buy','Explain how to purchase Samsung Care+, encourage offline purchase at the nearest SES. Online via Samsung.com also possible.','“Nah buat yang beli, caranya juga gampang banget…”'],
+    ['Drive to CTA','Encourage the audience to get the affordability/trade-in program and Samsung Care+ for security and peace of mind.','“Jadi, daripada kena hari apes yang gak ada di kalender…”']
+  ];
+  $('contentFocus').innerHTML = steps.map(([t,d,q],i)=>`<div class="node"><div class="no">${i+1}</div><h4>${t}</h4><p>${d}</p><p class="quote" style="font-size:12px;margin-top:6px">${q}</p></div>`).join('');
+  animateWidths(document.getElementById('pr'));
+}
+
+// ---- 08 RETAIL ----
+function renderRetail(){
+  $('marginBars').innerHTML = `<div class="bars">
+    ${barRow('ORG · Current',25,30,'25%','linear-gradient(90deg,#8A94A6,#C9D0DB)')}
+    ${barRow('ORG · New',25,30,'Fix 25%')}
+    ${barRow('TRD · Current',10,30,'10%','linear-gradient(90deg,#8A94A6,#C9D0DB)')}
+    ${barRow('TRD · Distri',1,30,'+1%','linear-gradient(90deg,#1B9E6B,#7FD8B0)')}
+  </div>`;
+
+  $('incentiveBars').innerHTML = `<div class="bars">${[
+    ['Silver & Gold',20000],['Platinum',30000],['Diamond',50000],['Foldable',75000],['(tanpa label)',100000]
+  ].map(([n,v])=>barRow(n,v,100000,'Rp'+fmt(v))).join('')}</div>`;
+
+  $('posmBars').innerHTML = `<div class="bars">${[
+    ['Poster A5 · 272 store',4080000],['Flyer · 4,838 store',81300000],['Sticker · 246 store',84620000]
+  ].map(([n,v])=>barRow(n,v,90000000,'Rp'+fmt(v)))}</div>`.replace(/,(?=<div)/g,'');
+
+  $('touchMatrix').innerHTML = `<div class="tbl-wrap"><table>
+    <thead><tr><th>Touchpoint</th><th style="text-align:center">SES</th><th style="text-align:center">SES-P</th></tr></thead>
+    <tbody>${[
+      ['Poster A5 | Prem – High stores',false,true],['Flyer (All Brandshop)',true,true],['Show & Tell',true,true],
+      ['E-Paper',true,false],['DPOP*',true,true],['RDU (RMS)',true,true],['Sticker',true,false]
+    ].map(([n,a,b])=>`<tr><td><b>${n}</b></td>
+      <td style="text-align:center">${a?'<span class="chip good" style="margin:0">✓ Ada</span>':'<span class="small">—</span>'}</td>
+      <td style="text-align:center">${b?'<span class="chip good" style="margin:0">✓ Ada</span>':'<span class="small">—</span>'}</td></tr>`).join('')}</tbody></table></div>`;
+
+  const cols = ['Okt 7','Okt 14','Okt 16','Okt 19','Okt 20','Okt 22','Okt 23','Okt 27','Okt 29','Nov 4','Nov 12'];
+  // timeline: date index mapping (Oct 7 = day 0)
+  const day = (m,d)=> (m==='Oct'? d-7 : (d+24)); // Oct 7 → 0, Nov 12 → 36
+  const span = 36;
+  const bars = [
+    ['Poster A5 · Area Print', [[16,'FA Design & Resizing / Brief Area Printing'],[20,'Start Installation']], '#1428A0'],
+    ['Flyer · Central Print', [[22,'Relayout + approve'],[27,'Mockup #1'],[29,'Start production'],[35,'Ship batch 1: Jabodetabek (4 Nov)']], '#1F5BFF'],
+    ['Sticker · Central Print', [[7,'Relayout'],[14,'Approve (delay re-bidding)'],[16,'Mockup #1/#2'],[19,'Start production (2 batch)'],[23,'1st shipment Jabodetabek'],[29,'Nationwide shipment'],[43,'Complete shipment (12 Nov)']], '#0B1F3A']
+  ];
+  $('retailGantt').innerHTML = `
+    <div class="wk" style="grid-template-columns:200px repeat(${span+1},1fr);gap:0"><div class="h"></div>${[...Array(span+1)].map((_,i)=>{const dd=i+7; return (i%5===0)?`<div class="h" style="text-align:left;grid-column:span 5">${dd<=31?'Okt '+dd:'Nov '+(dd-31)}</div>`:''}).join('')}</div>
+    ${bars.map(([name,pts,c])=>`<div class="row" style="grid-template-columns:200px repeat(${span+1},1fr);gap:0;padding:8px 0">
+      <div class="lbl2">${name}</div>
+      ${[...Array(span+1)].map((_,i)=>{
+        const p = pts.find(x=>(x[0]-7)===i);
+        return `<div style="position:relative;height:24px">${p?`<span title="${p[1]}" style="position:absolute;left:50%;top:0;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:${c};box-shadow:0 0 0 3px rgba(31,91,255,.15)"></span>`:''}</div>`;
+      }).join('')}
+    </div>`).join('')}
+    <div class="small" style="margin-top:6px">Titik = milestone. Tanggal sesuai slide (7 Okt – 12 Nov 2026). Detail milestone ada di tooltip dan di tabel timeline sumber.</div>`;
+  animateWidths(document.getElementById('retail'));
+}
+
+// ---- 09 ROLL OUT ----
+function renderRollout(){
+  $('rolloutTargetSC').innerHTML = `<div class="cols" style="height:170px">
+    <div class="col"><div class="bar" data-h="71" style="height:0"><span>19,085 (41%)</span></div><div class="lb">NOV ’26</div></div>
+    <div class="col"><div class="bar" data-h="100" style="height:0"><span>26,952 (59%)</span></div><div class="lb">DEC ’26</div></div></div>`;
+  $('rolloutTargetRev').innerHTML = `<div class="cols alt" style="height:170px">
+    <div class="col"><div class="bar alt" data-h="70" style="height:0"><span>$240,828 (41%)</span></div><div class="lb">NOV ’26</div></div>
+    <div class="col"><div class="bar alt" data-h="100" style="height:0"><span>$343,041 (59%)</span></div><div class="lb">DEC ’26</div></div></div>`;
+
+  $('kmNov').innerHTML = ['Price Drop','Full Protection/ADLD','Transfer Policy'].map((t,i)=>`<div style="background:${['#1428A0','#1F5BFF','#4C84FF'][i]}"><h4>${t}</h4></div>`).join('');
+  $('kmDec').innerHTML = ['Global Repair','Easy Protection','Monthly Subs E-store'].map((t,i)=>`<div style="background:${['#1428A0','#1F5BFF','#4C84FF'][i]}"><h4>${t}</h4></div>`).join('');
+
+  const w = ['W47','W48','W49','W50','W51','W52','W53'];
+  const hdr = `<div class="wk" style="grid-template-columns:200px repeat(7,1fr)"><div class="h"></div>${w.map(x=>`<div class="h">${x}</div>`).join('')}</div>`;
+  const row = (label, sub, start, end, color, text, lite=false)=>`
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="lbl2">${label}<div class="small" style="font-weight:500">${sub}</div></div>
+      <div style="grid-column:2;display:grid;grid-template-columns:repeat(7,1fr);gap:4px">
+        <div class="bar ${lite?'lite':''}" style="grid-column:${Math.max(1,start-2)} / ${Math.max(1,end-2)+1};${lite?'':'background:'+color}">${text}</div>
+      </div>
+    </div>`;
+  $('rolloutGantt').innerHTML = hdr +
+    `<div style="background:var(--grad);color:#fff;font-weight:800;padding:9px 14px;border-radius:12px;margin:8px 0;letter-spacing:.06em;font-size:13px">PRODUCT ENGAGEMENT</div>` +
+    
+    row('Influencer','8 NoP · 2.0% IER · 1M PO Reach',2,4,'#1F5BFF','4 KOLs · Care Starts Here · IG Reels, TikTok') +
+    row('','',5,9,'#4C84FF','4 KOLs · Less Drama, More Value · IG Reels, TikTok') +
+    row('PR','100 Clips · 12 NoK · 26 NoP · 11.8M Po Reach',2,4,'#0B1F3A','100 PR News & Media Clips') +
+    row('','',1,8,'#0B1F3A','26 Tech Reviewers’ Contents') +
+    `<div style="background:var(--grad);color:#fff;font-weight:800;padding:9px 14px;border-radius:12px;margin:12px 0 8px;letter-spacing:.06em;font-size:13px">STORE TRAFFIC GENERATION</div>` +
+    row('Social Edu Content','20 Post',1,9,'#1428A0','20 Post Social Edu Content') +
+    row('Influencer','10 NoP · 2.0% IER · 1.8M PO Reach',2,4,'#1F5BFF','4 KOLs · Care Starts Here · IG Reels, TikTok') +
+    row('','',5,9,'#4C84FF','6 KOLs · Less Drama, More Value · IG Reels, TikTok') +
+    row('Retail','246 SES | 572 SES-P',2,9,'#1428A0','Printed: Poster A5, Flyer, Sticker') +
+    row('','',2,9,'#0B1F3A','Digital: Show & Tell, E-Paper, DPOP, RDU (RMS)');
+
+  $('phaseChev').innerHTML = [['OKTOBER','#1428A0'],['NOVEMBER','#1F5BFF'],['DESEMBER','#0B1F3A']].map(([m,c])=>`<div style="background:${c}"><h4>${m}</h4><p>NoP 13 · Buzz · AEP</p></div>`).join('');
+  $('phaseDetail').innerHTML = `
+    <div class="c4 box"><div class="label">Oktober</div><ul class="clean" style="margin-top:8px"><li>Boost promo &amp; straightforward messaging through KV on OA</li><li>Trendjacking “The Falling Dream”</li><li>Pakai Samsung Care+ from day 1 VS Gak Pakai</li></ul><div style="margin-top:8px"><span class="chip">Buzz 1.595 / 3.989 / 2.993</span></div></div>
+    <div class="c4 box"><div class="label">November</div><ul class="clean" style="margin-top:8px"><li>Hygiene OA Content, UGC Activation</li><li>Kenapa harus pakai Samsung Care+ sejak day 1?</li><li>UGC Activity Reply &amp; Win</li></ul><div style="margin-top:8px"><span class="chip">Buzz 7.977 · AEP 1.077 · NoP 13</span></div></div>
+    <div class="c4 box"><div class="label">Desember</div><ul class="clean" style="margin-top:8px"><li>Trade in Galaxy, Samsung Care+ nya gimana?</li><li>Kapan harus beli Samsung Care+?</li><li>Trade-in segini, dapet benefit ini</li></ul><div style="margin-top:8px"><span class="chip">100 Clips | IG TT YT Short</span></div></div>`;
+
+  $('rolloutKOL').innerHTML = [
+    ['Care Starts Here · Okt','NoK 7 · NoP 7','Khansa · Cipop · Gabriela Desta'],
+    ['Education · Nov','NoK 7 · NoP 7','Joshua · Reza Febs · Abi Morris'],
+    ['Education · Des','NoK 4 · NoP 4','Clara Lianis · Tessy Valensia']
+  ].map(([t,n,k])=>`<div class="icon-card" style="min-width:240px"><b>${t}</b><span>${n}</span><div class="small" style="margin-top:6px">${k}</div></div>`).join('');
+  animateWidths(document.getElementById('rollout'));
+}
+
+// ---- 10 KPI ----
+function renderQ4Plan(){
+  const fm = n => 'Rp ' + n.toLocaleString('id-ID');
+  const P = [
+    {name:'PRODUCT ENGAGEMENT', pct:40, grad:'linear-gradient(135deg,#1F5BFF,#1428A0)', ch:[
+      {n:'Influencers',i:'👥',b:120000000,k:[['NoK','4'],['NoP','4'],['Potential Reach','768,000'],['IER','2.0%'],['Owning Content','4']]},
+      
+      {n:'PR',i:'📰',b:240000000,k:[['PR Buzz','50'],['Media Clips','40'],['NoK','5'],['NoP','10'],['Po. Reach','4,720,000'],['Views','188,000']]}
+    ]},
+    {name:'STORE TRAFFIC GENERATION', pct:60, grad:'linear-gradient(135deg,#7A2FA8,#4B1A7A)', ch:[
+      {n:'Influencers',i:'👥',b:120000000,k:[['NoK','8'],['NoP','8'],['Potential Reach','1,152,000'],['IER','2.0%'],['Owning Content','5']]},
+      {n:'Social',i:'📱',b:400000000,k:[['Social Edu Content','20'],['Buzz','11,906'],['Positive Sentiment','38.08%'],['NPS','37.75%'],['AEP','1,548']]},
+      {n:'PR',i:'📰',b:240000000,k:[['PR Buzz','76'],['Media Clips','60'],['NoK','7'],['NoP','16'],['Po. Reach','7,080,000'],['Views','282,000']]},
+      {n:'Retail',i:'🏬',b:100000000,k:[['# of SES','246'],['# of SES-P','572']]}
+    ]}
+  ];
+  const card = c => `<div class="card" style="padding:16px 18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">${c.i}</span><b style="color:var(--navy);font-size:15px">${c.n}</b></div>
+      <span class="chip dark" style="margin:0">${fm(c.b)}</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+      ${c.k.map(([k,v])=>`<div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px"><div class="small">${k}</div><div style="font-weight:800;color:var(--navy);font-size:17px;font-variant-numeric:tabular-nums">${v}</div></div>`).join('')}
+    </div></div>`;
+  const pill = p => `<div style="background:${p.grad};color:#fff;border-radius:18px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;box-shadow:var(--shadow)">
+    <div><div class="label" style="color:rgba(255,255,255,.8)">Pillar</div><div style="font-size:18px;font-weight:800;letter-spacing:.03em">${p.name}</div></div>
+    <div style="font-size:34px;font-weight:800">${p.pct}%</div></div>`;
+  const body = p => `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:22px">${p.ch.map(card).join('')}</div>`;
+  $('q4Plan').innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px">
+      <div class="card tile"><div class="label">Total Campaign Budget</div><div class="val">Rp 1,000,000,000</div><div class="meta">Nov – Dec 2026</div></div>
+      <div class="card tile"><div class="label">Product Engagement</div><div class="val">40%</div><div class="meta">Pillar Q4 focus</div></div>
+      <div class="card tile"><div class="label">Store Traffic Generation</div><div class="val">60%</div><div class="meta">Pillar Q4 focus</div></div>
+    </div>
+    ${pill(P[0])}${body(P[0])}
+    ${pill(P[1])}${body(P[1])}
+    `;
+}
+function renderKPI(){ renderQ4Plan();
+  const bud = [['Social',400,'#1F5BFF'],['PR',300,'#4C84FF'],['Influencers',200,'#1428A0'],['Retail',100,'#0B1F3A']];
+  $('donutBudget').outerHTML = donut(bud.map(([n,v,c])=>({pct:v/10,color:c})),160,'Rp 1 Jt','total');
+  $('budgetLeg').innerHTML = bud.map(([n,v,c])=>`<div><span><i class="dot" style="background:${c}"></i>${n}</span><b>Rp ${v} Jt · ${v/10}%</b></div>`).join('');
+
+  const cards = [
+    {t:'Influencers',b:'Rp 300,000,000',rows:[['NoK','18'],['NoP','18'],['Potential Reach','2,880,000'],['IER','2.0%'],['Owning Content','9']],c:'#1428A0'},
+    {t:'Digital',b:'Rp 300,000,000',rows:[['Short-Form','200'],['Buzz','7,977'],['Positive Sentiment','38.08%'],['NPS','37.75%'],['AEP','1,077'],['NoP','13']],c:'#1F5BFF'},
+    {t:'PR',b:'Rp 300,000,000',rows:[['PR Buzz','126'],['Media Clips','100'],['NoK','12'],['NoP','26'],['Po. Reach','11,800,000'],['Views','470,000']],c:'#4C84FF'},
+    {t:'Retail',b:'Rp 100,000,000',rows:[['# of SES','246'],['# of SES-P','572']],c:'#0B1F3A'}
+  ];
+  $('bvkCards').innerHTML = cards.map(c=>`
+    <div class="c3"><div style="background:${c.c};color:#fff;border-radius:14px 14px 0 0;padding:12px 16px">
+      <div style="font-size:14px;font-weight:700">${c.t}</div><div class="small" style="color:rgba(255,255,255,.85)">${c.b}</div></div>
+      <div style="background:#fff;border:1px solid var(--line);border-top:none;border-radius:0 0 14px 14px;padding:10px 14px">
+      ${c.rows.map(([k,v])=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line);font-size:13px"><span>${k}</span><b style="color:var(--navy);font-variant-numeric:tabular-nums">${v}</b></div>`).join('')}
+      </div></div>`).join('') +
+    `<div class="c12"><div class="chip dark" style="font-size:13px;padding:8px 14px">Conversion 46,037 · Revenue 583,869 · Total Campaign Budget Rp 1,000,000,000</div></div>`;
+
+  const dig = [
+    ['Short Form',null,200,'-'],['Buzz',11906,7977,'0.67'],['Positive Sentiment',38.08,38.08,'1'],['NPS',37.75,37.75,'1.00'],['AEP',1346,1077,'0.80'],['NOP',20,13,'0.67']
+  ];
+  $('digitalKPI').innerHTML = `<div class="grid">${dig.map(([n,a,b,idx])=>{
+    if(a===null) return `<div class="c4 box"><div class="label">${n}</div><div class="val" style="font-size:24px;color:var(--navy)">200</div><div class="small">Samsung Care+ · N-1 tidak tersedia</div></div>`;
+    const max = Math.max(a,b);
+    return `<div class="c6 box"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label">${n}</div><span class="chip ${parseFloat(idx)>=1?'good':'warn'}">Index ${idx}</span></div>
+      <div class="bars" style="margin-top:8px">
+        <div class="brow" style="grid-template-columns:90px 1fr 80px"><span class="nm">N-1 (Wallet)</span><div class="track2"><div class="fill" data-w="${(a/max*100).toFixed(1)}" style="background:#A7D8FF"></div></div><span class="v" style="font-size:12px">${typeof a==='number'&&a>100?fmt(a):a+'%'}</span></div>
+        <div class="brow" style="grid-template-columns:90px 1fr 80px"><span class="nm">Samsung Care+</span><div class="track2"><div class="fill" data-w="${(b/max*100).toFixed(1)}"></div></div><span class="v" style="font-size:12px">${typeof b==='number'&&b>100?fmt(b):b+'%'}</span></div>
+      </div></div>`;
+  }).join('')}</div>`;
+
+  const inf = [
+    ['Budget','300,000,000','300,000,000','1x',1],['PO Reach','6,973,132','2,880,000','0.4x',0.41],['NOP','29','18','0.6x',0.62],['NOK','22','18','0.82x',0.82],['ER','1.65%','2%','1.2x',0.83],['Owning Contents','2','9','4.5x',0.22]
+  ];
+  $('infKPI').innerHTML = `<div class="grid">${inf.map(([n,w,k,idx,ratio])=>`
+    <div class="c4 box"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label">${n}</div><span class="chip warn">Index ${idx}</span></div>
+      <div class="ring-wrap" style="margin-top:10px;gap:12px"><div class="ring" style="width:72px;height:72px"><svg width="72" height="72"><circle class="track" cx="36" cy="36" r="29" style="stroke-width:8"/><circle class="prog" data-ring="${(ratio*100).toFixed(0)}" cx="36" cy="36" r="29" stroke-width="8" stroke-dasharray="182.2" stroke-dashoffset="182.2"/></svg><div class="txt" style="font-size:11px">${idx}</div></div>
+      <div style="font-size:12.5px"><div><span class="small">Samsung Wallet</span> <b>${w}</b></div><div><span class="small">KPI</span> <b>${k}</b></div></div></div></div>`).join('')}</div>`;
+  animateWidths(document.getElementById('kpi'));
+}
+
+/* ============================================================
+   INIT & NAVIGASI
+   ============================================================ */
+const RENDER = {
+  background: renderBackground, product: renderProduct, comm: renderComm, mktplan: renderMarketing,
+  digital: renderDigital, influencers: renderInfluencers, pr: renderPR, retail: renderRetail,
+  rollout: renderRollout, kpi: renderKPI
+};
+const rendered = {};
+const buttons = document.querySelectorAll('#nav button');
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('show', p.id===id));
+  buttons.forEach(b=>b.classList.toggle('active', b.dataset.page===id));
+  if(!rendered[id]){ RENDER[id](); rendered[id]=true; }
+  else animateWidths(document.getElementById(id));
+  window.scrollTo({top:0,behavior:'smooth'});
+  try { history.replaceState(null,'','#'+id); } catch(e) { /* iframe sandbox: abaikan */ }
+}
+buttons.forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+
+document.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  const idx=[...buttons].findIndex(b=>b.classList.contains('active'));
+  if(e.key==='ArrowRight' && idx<buttons.length-1) showPage(buttons[idx+1].dataset.page);
+  if(e.key==='ArrowLeft' && idx>0) showPage(buttons[idx-1].dataset.page);
+});
+
+const initial = location.hash.replace('#','');
+if(initial && RENDER[initial]) showPage(initial);
+else showPage('background');
+</script>
+</body>
+</html>
