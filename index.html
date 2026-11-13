@@ -264,12 +264,12 @@
     <button data-page="product"><span class="n">02</span>Product Benefit</button>
     <button data-page="comm"><span class="n">03</span>Communication &amp; Creative</button>
     <button data-page="mktplan"><span class="n">04</span>Marketing Plan</button>
-    <button data-page="digital"><span class="n">05</span>Digital</button>
-    <button data-page="influencers"><span class="n">06</span>Influencers</button>
+    <button data-page="digital"><span class="n">05</span>Digital &amp; Influencers</button>
     <button data-page="pr"><span class="n">07</span>PR</button>
-    <button data-page="retail"><span class="n">08</span>Retail</button>
-    <button data-page="rollout"><span class="n">09</span>Roll Out</button>
-    <button data-page="kpi"><span class="n">10</span>KPI</button>
+    <button data-page="samsungmember"><span class="n">08</span>Samsung Member</button>
+    <button data-page="retail"><span class="n">09</span>Retail</button>
+    <button data-page="rollout"><span class="n">10</span>Roll Out</button>
+    <button data-page="kpi"><span class="n">11</span>KPI</button>
   </nav>
   <div class="side-foot">SEIN © 2026 · Private &amp; Confidential</div>
 </aside>
@@ -721,9 +721,9 @@
   <div class="grid">
     <div class="card tile" style="grid-column:span 2"><div class="label">PR Buzz</div><div class="val">126</div></div>
     <div class="card tile" style="grid-column:span 2"><div class="label">Media Clips</div><div class="val">100</div></div>
-    <div class="card tile" style="grid-column:span 2"><div class="label">NoK</div><div class="val">12</div></div>
-    <div class="card tile" style="grid-column:span 2"><div class="label">NoP</div><div class="val">26</div></div>
-    <div class="card tile" style="grid-column:span 2"><div class="label">PO Reach</div><div class="val">11.8M</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">NoK</div><div class="val">13</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">NoP</div><div class="val">27</div></div>
+    <div class="card tile" style="grid-column:span 2"><div class="label">PO Reach</div><div class="val">14.1M</div></div>
     <div class="card tile" style="grid-column:span 2"><div class="label">Views</div><div class="val">470K</div></div>
     
     
@@ -793,7 +793,7 @@
     </div>
 
     <div class="card c12"><h3>Tech Reviewer Plan · PO Reach per Reviewer</h3><div class="sub">With NoK, NoP, and Views per reviewer</div><div id="reviewerGrid"></div><div id="reviewerBars" style="display:none"></div>
-      <div class="note">Total NoK 12 · NoP 26 · PO Reach 11.8M · Views 470K.</div>
+      <div class="note">Total NoK 13 · NoP 27 · PO Reach 11.8M · Views 470K.</div>
     </div>
 
     <div class="card c12"><h3>Tech Reviewers Timeline</h3><div id="reviewerWeeks"></div></div>
@@ -803,6 +803,45 @@
 
     <div class="card c12"><h3>Tech Reviewer Content Focus · Alur 6 Tahap</h3>
       <div class="flow" id="contentFocus" style="grid-template-columns:repeat(6,minmax(0,1fr))"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 SAMSUNG MEMBER ============ -->
+<section class="page" id="samsungmember">
+  <div class="topbar"><div><div class="kicker">08 · Samsung Member</div><h2>Samsung Member</h2></div></div>
+  <div class="grid">
+    <div class="card c12" style="background:#fff">
+      <h3>KPI Samsung Member</h3>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px">
+        <div class="card tile"><div class="label">Number of Post</div><div class="val">25</div></div>
+        <div class="card tile"><div class="label">Potential Reach</div><div class="val">64,165</div></div>
+      </div>
+    </div>
+
+    <div class="card c12" style="background:#fff">
+      <h3>3 Pillar Communication</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px">
+        <div style="border-radius:16px;padding:18px;background:linear-gradient(135deg,#1428A0,#1F5BFF);color:#fff">
+          <div class="label" style="color:rgba(255,255,255,.8)">Pillar 1</div>
+          <div style="font-size:18px;font-weight:800;margin-top:6px">In-store Purchase</div>
+          <div style="font-size:34px;font-weight:800;margin-top:8px">40%</div>
+        </div>
+        <div style="border-radius:16px;padding:18px;background:linear-gradient(135deg,#7A2FA8,#B06BE0);color:#fff">
+          <div class="label" style="color:rgba(255,255,255,.8)">Pillar 2</div>
+          <div style="font-size:18px;font-weight:800;margin-top:6px">How-To Claim</div>
+          <div style="font-size:34px;font-weight:800;margin-top:8px">30%</div>
+        </div>
+        <div style="border-radius:16px;padding:18px;background:linear-gradient(135deg,#0E9F8E,#2BD0B8);color:#fff">
+          <div class="label" style="color:rgba(255,255,255,.8)">Pillar 3</div>
+          <div style="font-size:18px;font-weight:800;margin-top:6px">Testimoni</div>
+          <div style="font-size:34px;font-weight:800;margin-top:8px">30%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c12" style="background:#fff">
+      <img src="https://res.cloudinary.com/rolpld3f/image/upload/v1794539785/Screenshot_2026-11-13_093542.png" alt="Samsung Member" loading="lazy" style="width:100%;border-radius:16px;border:1px solid var(--line)">
     </div>
   </div>
 </section>
@@ -1598,10 +1637,12 @@ function renderRollout(){
     row('','',5,9,'#4C84FF','4 KOLs · Less Drama, More Value · IG Reels, TikTok') +
     row('PR','100 Clips · 12 NoK · 26 NoP · 11.8M Po Reach',2,4,'#0B1F3A','100 PR News & Media Clips') +
     row('','',1,8,'#0B1F3A','26 Tech Reviewers’ Contents') +
+    row('Samsung Member','25 NoP · 64,165 Potential Reach',3,9,'#1428A0','Samsung Member') +
     `<div style="background:var(--grad);color:#fff;font-weight:800;padding:9px 14px;border-radius:12px;margin:12px 0 8px;letter-spacing:.06em;font-size:13px">STORE TRAFFIC GENERATION</div>` +
     row('Social Edu Content','20 Post',1,9,'#1428A0','20 Post Social Edu Content') +
     row('Influencer','10 NoP · 2.0% IER · 1.8M PO Reach',2,4,'#1F5BFF','4 KOLs · Care Starts Here · IG Reels, TikTok') +
     row('','',5,9,'#4C84FF','6 KOLs · Less Drama, More Value · IG Reels, TikTok') +
+    row('Tech Reviewer','8 NoK · 17 NoP',3,4,'#0B1F3A','Tech Reviewer') +
     row('Retail','246 SES | 572 SES-P',2,9,'#1428A0','Printed: Poster A5, Flyer, Sticker') +
     row('','',2,9,'#0B1F3A','Digital: Show & Tell, E-Paper, DPOP, RDU (RMS)');
 
@@ -1624,14 +1665,15 @@ function renderQ4Plan(){
   const fm = n => 'Rp ' + n.toLocaleString('id-ID');
   const P = [
     {name:'PRODUCT ENGAGEMENT', pct:40, grad:'linear-gradient(135deg,#1F5BFF,#1428A0)', ch:[
-      {n:'Influencers',i:'👥',b:120000000,k:[['NoK','4'],['NoP','4'],['Potential Reach','768,000'],['IER','2.0%'],['Owning Content','4']]},
+      {n:'Influencers',i:'👥',b:80000000,k:[['NoK','4'],['NoP','4'],['Potential Reach','768,000'],['IER','2.0%'],['Owning Content','4']]},
       
-      {n:'PR',i:'📰',b:240000000,k:[['PR Buzz','50'],['Media Clips','40'],['NoK','5'],['NoP','10'],['Po. Reach','4,720,000'],['Views','188,000']]}
+      {n:'PR',i:'📰',b:240000000,k:[['PR Buzz','50'],['Media Clips','40'],['NoK','5'],['NoP','10'],['Po. Reach','4,720,000'],['Views','188,000']]},
+      {n:'Samsung Member',i:'🎟️',b:50000000,k:[['Number of Post','25'],['Potential Reach','64,165']]}
     ]},
     {name:'STORE TRAFFIC GENERATION', pct:60, grad:'linear-gradient(135deg,#7A2FA8,#4B1A7A)', ch:[
       {n:'Influencers',i:'👥',b:120000000,k:[['NoK','8'],['NoP','8'],['Potential Reach','1,152,000'],['IER','2.0%'],['Owning Content','5']]},
       {n:'Social',i:'📱',b:400000000,k:[['Social Edu Content','20'],['Buzz','11,906'],['Positive Sentiment','38.08%'],['NPS','37.75%'],['AEP','1,548']]},
-      {n:'PR',i:'📰',b:240000000,k:[['PR Buzz','76'],['Media Clips','60'],['NoK','7'],['NoP','16'],['Po. Reach','7,080,000'],['Views','282,000']]},
+      {n:'PR',i:'📰',b:240000000,k:[['PR Buzz','76'],['Media Clips','60'],['NoK','8'],['NoP','17'],['Po. Reach','10,180,000'],['Views','282,000']]},
       {n:'Retail',i:'🏬',b:100000000,k:[['# of SES','246'],['# of SES-P','572']]}
     ]}
   ];
@@ -1657,7 +1699,7 @@ function renderQ4Plan(){
     `;
 }
 function renderKPI(){ renderQ4Plan();
-  const bud = [['Social',400,'#1F5BFF'],['PR',300,'#4C84FF'],['Influencers',200,'#1428A0'],['Retail',100,'#0B1F3A']];
+  const bud = [['PR (Senyata)',350,'#4C84FF'],['Social (Redcomm)',300,'#1F5BFF'],['Influencers (Goat)',200,'#1428A0'],['Retail (Cheil)',100,'#0B1F3A'],['Samsung Member (Cheil)',50,'#A7D8FF']];
   $('donutBudget').outerHTML = donut(bud.map(([n,v,c])=>({pct:v/10,color:c})),160,'Rp 1 Jt','total');
   $('budgetLeg').innerHTML = bud.map(([n,v,c])=>`<div><span><i class="dot" style="background:${c}"></i>${n}</span><b>Rp ${v} Jt · ${v/10}%</b></div>`).join('');
 
@@ -1703,14 +1745,14 @@ function renderKPI(){ renderQ4Plan();
    ============================================================ */
 const RENDER = {
   background: renderBackground, product: renderProduct, comm: renderComm, mktplan: renderMarketing,
-  digital: renderDigital, influencers: renderInfluencers, pr: renderPR, retail: renderRetail,
+  digital: ()=>{ renderDigital(); renderInfluencers(); }, influencers: renderInfluencers, pr: renderPR, samsungmember: ()=>{}, retail: renderRetail,
   rollout: renderRollout, kpi: renderKPI
 };
 const rendered = {};
 const buttons = document.querySelectorAll('#nav button');
 
 function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('show', p.id===id));
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('show', p.id===id || (id==='digital' && p.id==='influencers')));
   buttons.forEach(b=>b.classList.toggle('active', b.dataset.page===id));
   if(!rendered[id]){ RENDER[id](); rendered[id]=true; }
   else animateWidths(document.getElementById(id));
@@ -1726,6 +1768,29 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft' && idx>0) showPage(buttons[idx-1].dataset.page);
 });
 
+(function(){
+  const grid = document.querySelector('#digital > .grid');
+  const infCard = document.querySelector('#infTotals') && document.querySelector('#infTotals').parentElement;
+  if(!grid || !infCard) return;
+  const framework = [...grid.children].find(el => el.querySelector('h3') && el.querySelector('h3').textContent.includes('Digital Strategic Framework'));
+  infCard.style.order = '';
+  infCard.style.marginBottom = '0';
+  infCard.insertAdjacentHTML('afterbegin','<div style="display:inline-block;background:#7A2FA8;color:#fff;font-weight:800;font-size:13px;letter-spacing:.04em;padding:7px 14px;border-radius:10px;margin-bottom:12px">👥 INFLUENCERS KPI</div>');
+  if(framework) grid.insertBefore(infCard, framework);
+  const tiles = [...grid.querySelectorAll(':scope > .tile')];
+  if(tiles.length){
+    const box = document.createElement('div');
+    box.style.cssText = 'grid-column:span 12;background:var(--ice-soft);border:1px solid var(--line);border-radius:18px;padding:14px 16px;';
+    box.innerHTML = '<div style="display:inline-block;background:#0E9F8E;color:#fff;font-weight:800;font-size:13px;letter-spacing:.04em;padding:7px 14px;border-radius:10px;margin-bottom:12px">📱 DIGITAL KPI</div><div class="digital-tiles" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px"></div>';
+    const outer = document.createElement('div');
+    outer.style.cssText = 'grid-column:span 12;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px';
+    grid.insertBefore(outer, tiles[0]);
+    outer.appendChild(box);
+    outer.appendChild(infCard);
+    const inner = box.querySelector('.digital-tiles');
+    tiles.forEach(t => { t.style.gridColumn = ''; inner.appendChild(t); });
+  }
+})();
 const initial = location.hash.replace('#','');
 if(initial && RENDER[initial]) showPage(initial);
 else showPage('background');
